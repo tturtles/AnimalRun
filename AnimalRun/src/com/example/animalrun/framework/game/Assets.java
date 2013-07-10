@@ -10,4 +10,5 @@ public class Assets {
 	public static Pixmap bt_lion;
 	public static Pixmap bt_kapipara;
 	public static Pixmap bt_datyou;
+	public static Pixmap animal;
 }
