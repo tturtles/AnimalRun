@@ -7,5 +7,7 @@ public class Assets {
 	public static Pixmap bt_start;
 	public static Pixmap bt_score;
 	public static Pixmap bt_close;
-	
+	public static Pixmap bt_lion;
+	public static Pixmap bt_kapipara;
+	public static Pixmap bt_datyou;
 }
