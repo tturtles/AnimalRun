@@ -20,8 +20,8 @@ public abstract class Sprite {
 
 	public abstract void Update();
 
-	public void draw(Graphics g, int offsetX, int offsetY) {
-		g.drawPixmap(image, (int) x + offsetX, (int) x + offsetY);
+	public void draw(Graphics g) {
+		g.drawPixmap(image, (int) x, (int) x);
 	}
 
 	/*
@@ -38,7 +38,6 @@ public abstract class Sprite {
 		} // //Rect同士ぶつかり合っていたらtrue
 		return false;
 	}
-	
 
 	public double getX() {
 		return x;
