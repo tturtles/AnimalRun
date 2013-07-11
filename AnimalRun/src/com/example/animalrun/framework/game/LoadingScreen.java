@@ -22,6 +22,7 @@ public class LoadingScreen extends Screen {
 		Assets.bt_lion = g.newPixmap("bt_lion.png", PixmapFormat.ARGB4444);
 		Assets.bt_datyou = g.newPixmap("bt_datyou.png", PixmapFormat.ARGB4444);
 		Assets.animal = g.newPixmap("animal.png", PixmapFormat.ARGB4444);
+		Assets.way = g.newPixmap("way.png", PixmapFormat.ARGB4444);
 		game.setScreen(new StartScreen(game));
 	}
 

@@ -3,7 +3,7 @@ package com.example.animalrun.framework.game;
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
-public class lion extends Sprite {
+public class Lion extends Sprite {
 
 	enum Point {
 		Left, Center, Right
@@ -21,7 +21,7 @@ public class lion extends Sprite {
 
 	private World world;
 
-	public lion(double _x, double _y, Pixmap pixmap, World _world) {
+	public Lion(double _x, double _y, Pixmap pixmap, World _world) {
 		super(_x, _y, pixmap, _world);
 		x = _x;
 		y = _y;
@@ -38,7 +38,7 @@ public class lion extends Sprite {
 	}
 	
 	public void draw(Graphics g, float deltaTime) {
-		
+		g.drawPixmap(Assets.animal, (int)x, (int)y);
 	}
 
 	// 左移動
