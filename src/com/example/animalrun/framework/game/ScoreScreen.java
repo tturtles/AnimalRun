@@ -26,17 +26,14 @@ public class ScoreScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (isBounds(event, 0, 100, 480, 100)) {
+				if (isBounds(event, 70, 500, 70, 100)) {
 					game.setScreen(new CharaSelectScreen(game));
 //					select = 1;
-				} else if (isBounds(event, 0, 300, 480, 100)) {
-//					select = 2;
-				} else if (isBounds(event, 0, 500, 480, 100)) {
-//					select = 3;
+				} else if (isBounds(event, 260, 500, 260, 100)) {
+					game.setScreen(new LoadingScreen(game));
 				}
-//				if(select>0) {
-//					game.setScreen(new LoadingScreen(game));
-//				}
+
+
 			}
 		}
 	}
