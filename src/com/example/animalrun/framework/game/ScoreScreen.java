@@ -15,7 +15,7 @@ public class ScoreScreen extends Screen {
 		super(game);
 	}
 
-	private int select=0;
+//	private int select=0;
 	@Override
 	public void update(float deltaTime) {
 		Graphics g = game.getGraphics();
@@ -27,15 +27,16 @@ public class ScoreScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (isBounds(event, 0, 100, 480, 100)) {
-					select = 1;
+					game.setScreen(new CharaSelectScreen(game));
+//					select = 1;
 				} else if (isBounds(event, 0, 300, 480, 100)) {
-					select = 2;
+//					select = 2;
 				} else if (isBounds(event, 0, 500, 480, 100)) {
-					select = 3;
+//					select = 3;
 				}
-				if(select>0) {
-					game.setScreen(new LoadingScreen(game));
-				}
+//				if(select>0) {
+//					game.setScreen(new LoadingScreen(game));
+//				}
 			}
 		}
 	}
