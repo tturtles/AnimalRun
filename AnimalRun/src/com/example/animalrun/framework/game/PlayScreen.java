@@ -30,9 +30,6 @@ public class PlayScreen extends Screen {
 		case 3:
 			lion = new Lion(190, 630, Assets.animal, world);
 			break;
-
-		default:
-			break;
 		}
 	}
 
@@ -70,8 +67,18 @@ public class PlayScreen extends Screen {
 			switch (event.type) {
 			case MotionEvent.ACTION_MOVE:
 			case MotionEvent.ACTION_DOWN:
+				if(isBounds(event, 0, 0, 160, 800)) {
+					lion.setRequest(1);
+				}
+				if(isBounds(event, 161, 0, 160, 800)) {
+					lion.setRequest(2);
+				}
+				if(isBounds(event, 321, 0, 160, 800)) {
+					lion.setRequest(3);
+				}
 			}
 		}
+		lion.Update();
 	}
 
 	private void updateGameOver(List<TouchEvent> touchEvents) {
@@ -111,6 +118,9 @@ public class PlayScreen extends Screen {
 		Graphics g = game.getGraphics();
 		world.draw(g);
 		lion.draw(g);
+		Paint paint = new Paint();
+		paint.setColor(Color.WHITE);
+		g.drawTextAlp(""+state, 0, 0, paint);
 	}
 
 	private void drawGameOverUI() {
@@ -121,6 +131,16 @@ public class PlayScreen extends Screen {
 		// ゲームクリア時のUI(描画系)
 	}
 
+	private boolean isBounds(TouchEvent event, int x, int y, int width,
+			int height) {
+		if (event.x > x && event.x < x + width - 1 && event.y > y
+				&& event.y < y + height - 1)
+			return true;
+		else
+			return false;
+	}
+
+	
 	@Override
 	public void pause() {
 	}

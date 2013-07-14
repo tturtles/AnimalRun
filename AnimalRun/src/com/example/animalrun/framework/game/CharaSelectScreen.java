@@ -28,11 +28,11 @@ public class CharaSelectScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (isBounds(event, 0, 100, 480, 100)) {
+				if (isBounds(event, 0, 100, 480, 200)) {
 					select = 1;
-				} else if (isBounds(event, 0, 300, 480, 100)) {
+				} else if (isBounds(event, 0, 300, 480, 200)) {
 					select = 2;
-				} else if (isBounds(event, 0, 500, 480, 100)) {
+				} else if (isBounds(event, 0, 500, 480, 200)) {
 					select = 3;
 				}
 				if(select>0) {
