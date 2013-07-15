@@ -2,6 +2,7 @@ package com.example.animalrun.framework.game;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.Toast;
 
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
@@ -31,7 +32,7 @@ public class Lion extends Sprite {
 		y = _y;
 		width = 100;
 		height = 150;
-		speed = 15;
+		speed = 10;
 		world = _world;
 		vx = 0;
 	}
@@ -39,30 +40,34 @@ public class Lion extends Sprite {
 	@Override
 	public void Update() {
 		switch (request) {
-		case Left:
+		case Left:	//左レーンをタップされた場合
 			if (x <= 40) {
 				request = Point.None;
 				point = Point.Left;
 			} else
 				accelerateLeft();
 			break;
-		case Center:
-			if (x <= 165) // 動物がRightにいるとき
-			{
-				request = Point.None;
-				point = Point.Center;
-			} else if(request == Point.Right)
-				accelerateLeft();
-
-			if (x >= 315) // 動物がLeftにいるとき
-			{
-				request = Point.None;
-				point = Point.Center;
-			} else if(request == Point.Left)
+		case Center:		//中央レーンをタップされた場合
+			if(x<=195) {	//キャラが中央レーン定位置より左にいた場合
 				accelerateRight();
+			}
+			if(x>=195&&x<=195+speed){
+				request = Point.None;
+				point = Point.Center;
+				break;
+			}
+			
+			if(x>=195) {//キャラが中央レーン定位置より右にいた場合
+				accelerateLeft();
+			}
+			if(x<=195&&x>=195-speed){
+				request = Point.None;
+				point = Point.Center;
+				break;
+			}
 			break;
-		case Right:
-			if (x >= 340) {
+		case Right:	//右レーンをタップされた場合
+			if (x >= 345) {
 				request = Point.None;
 				point = Point.Right;
 			} else 
