@@ -25,10 +25,10 @@ public class PlayScreen extends Screen {
 	public PlayScreen(Game game, int _select) {
 		super(game);
 		select = _select;
-		world = new World();
 		switch (select) {
 		case 3:
 			lion = new Lion(190, 630, Assets.animal, world);
+			world = new World(5);
 			break;
 		}
 	}
@@ -65,7 +65,6 @@ public class PlayScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			switch (event.type) {
-			case MotionEvent.ACTION_MOVE:
 			case MotionEvent.ACTION_DOWN:
 				if(isBounds(event, 0, 0, 160, 800)) {
 					lion.setRequest(1);
@@ -79,6 +78,7 @@ public class PlayScreen extends Screen {
 			}
 		}
 		lion.Update();
+		world.update(deltaTime);
 	}
 
 	private void updateGameOver(List<TouchEvent> touchEvents) {
