@@ -4,7 +4,7 @@ import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
 public class Car extends Sprite {
-	
+
 	private World world;
 	private int speedY;
 	private int vy;
@@ -14,7 +14,7 @@ public class Car extends Sprite {
 		x = _x;
 		y = _y;
 		this.world = world;
-		speedY = 10;
+		speedY = 5;
 	}
 
 
@@ -56,5 +56,5 @@ public class Car extends Sprite {
 		return width;
 	}
 
-	
+
 }

@@ -24,7 +24,7 @@ public class PlayScreen extends Screen {
 	private World world;
 	private Lion lion;
 	private LinkedList sprites;
-	
+
 	public PlayScreen(Game game, int _select) {
 		super(game);
 		select = _select;
@@ -127,6 +127,14 @@ public class PlayScreen extends Screen {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
 			sprite.draw(g);
+			if(sprite instanceof Car) {
+				Car car = (Car) sprite;
+				if(sprite.getY()>=810){
+					sprites.remove(car);
+					break;
+				}
+
+			}
 		}
 		Paint paint = new Paint();
 		paint.setColor(Color.WHITE);
@@ -150,7 +158,7 @@ public class PlayScreen extends Screen {
 			return false;
 	}
 
-	
+
 	@Override
 	public void pause() {
 	}
