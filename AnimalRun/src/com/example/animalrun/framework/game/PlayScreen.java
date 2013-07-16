@@ -1,5 +1,7 @@
 package com.example.animalrun.framework.game;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.graphics.Color;
@@ -21,6 +23,7 @@ public class PlayScreen extends Screen {
 	private int select = 0;
 	private World world;
 	private Lion lion;
+	private LinkedList sprites;
 	
 	public PlayScreen(Game game, int _select) {
 		super(game);
@@ -118,9 +121,16 @@ public class PlayScreen extends Screen {
 		Graphics g = game.getGraphics();
 		world.draw(g);
 		lion.draw(g);
+		LinkedList sprites = world.getSprites();
+		Iterator iterator = sprites.iterator(); // Iterator=コレクション内の要素を順番に取り出す方法
+		while (iterator.hasNext()) { // iteratorの中で次の要素がある限りtrue
+			Sprite sprite = (Sprite) iterator.next();
+			sprite.Update();
+			sprite.draw(g);
+		}
 		Paint paint = new Paint();
 		paint.setColor(Color.WHITE);
-		g.drawTextAlp(""+state, 0, 0, paint);
+		g.drawTextAlp(""+sprites.size(), 100, 100, paint);
 	}
 
 	private void drawGameOverUI() {

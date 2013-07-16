@@ -28,7 +28,13 @@ public class World {
 		while(tickTime>tick) {
 			tickTime -= tick;
 			flag = !flag;
+			sprites.add(new Car(40, 0, Assets.car, this));
 		}
+		
+	}
+	
+	public LinkedList getSprite() {
+		return sprites;
 	}
 	
 	public void load() {
