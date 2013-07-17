@@ -9,6 +9,10 @@ import android.graphics.Paint;
 import com.example.animalrun.framework.Graphics;
 
 public class World {
+	private final int MARGIN = 30; 
+	private final int LEFT = 40;
+	private final int CENTER = 195;
+	private final int RIGHT = 345;
 
 	private static final float TICK_INITIAL = 1.0f;
 	private static float tick = TICK_INITIAL; // 更新速度
@@ -29,11 +33,10 @@ public class World {
 			flag = !flag;
 			if (sprites.size() > 0) {
 				Sprite sprite = (Sprite) sprites.getLast();
-				if (sprite.getX() >= sprite.getHeight() + 30) {
-					sprites.add(new Car(40, 0, Assets.car, this));
+				if (sprite.getY() >= MARGIN) {
+					sprites.add(new Car(CENTER, -(sprite.getHeight()), Assets.car, this));
 				}
 			} else {
-				sprites.add(new Car(40, 0, Assets.car, this));
 			}
 		}
 	}
@@ -43,6 +46,7 @@ public class World {
 	}
 
 	public void load() {
+		sprites.add(new Car(RIGHT, -150, Assets.car, this));
 	}
 
 	public void draw(Graphics g) {

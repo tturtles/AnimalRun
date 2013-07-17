@@ -15,6 +15,7 @@ public class Car extends Sprite {
 		y = _y;
 		this.world = world;
 		speedY = 5;
+		height = 150;
 	}
 
 
