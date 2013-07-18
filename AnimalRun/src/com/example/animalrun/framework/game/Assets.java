@@ -13,4 +13,5 @@ public class Assets {
 	public static Pixmap animal;
 	public static Pixmap way;
 	public static Pixmap car;
+	public static Pixmap truk;
 }
