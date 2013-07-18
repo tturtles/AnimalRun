@@ -25,6 +25,16 @@ public class LoadingScreen extends Screen {
 		Assets.way = g.newPixmap("way.png", PixmapFormat.ARGB4444);
 		Assets.car = g.newPixmap("car.png", PixmapFormat.ARGB4444);
 		Assets.truk = g.newPixmap("trukbule.png", PixmapFormat.ARGB4444);
+		Assets.way0 = g.newPixmap("way0.png", PixmapFormat.ARGB4444);
+		Assets.way1 = g.newPixmap("way1.png", PixmapFormat.ARGB4444);
+		Assets.way2 = g.newPixmap("way2.png", PixmapFormat.ARGB4444);
+		Assets.way3 = g.newPixmap("way3.png", PixmapFormat.ARGB4444);
+		Assets.way4 = g.newPixmap("way4.png", PixmapFormat.ARGB4444);
+		Assets.way5 = g.newPixmap("way5.png", PixmapFormat.ARGB4444);
+		Assets.way6 = g.newPixmap("way6.png", PixmapFormat.ARGB4444);
+		Assets.way7 = g.newPixmap("way7.png", PixmapFormat.ARGB4444);
+		Assets.way8 = g.newPixmap("way8.png", PixmapFormat.ARGB4444);
+		Assets.way9 = g.newPixmap("way9.png", PixmapFormat.ARGB4444);
 		game.setScreen(new StartScreen(game));
 	}
 

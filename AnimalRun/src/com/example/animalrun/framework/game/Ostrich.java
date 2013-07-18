@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
-public class Capybara extends Sprite {
+public class Ostrich extends Sprite {
 
 	enum Point {
 		Left, Center, Right, None
@@ -26,7 +26,7 @@ public class Capybara extends Sprite {
 
 	private World world;
 
-	public Capybara(double _x, double _y, Pixmap pixmap, World _world) {
+	public Ostrich(double _x, double _y, Pixmap pixmap, World _world) {
 		super(_x, _y, pixmap, _world);
 		x = _x;
 		y = _y;

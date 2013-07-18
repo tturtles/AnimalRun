@@ -69,13 +69,13 @@ public class PlayScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			switch (event.type) {
 			case MotionEvent.ACTION_DOWN:
-				if(isBounds(event, 0, 0, 160, 800)) {
+				if (isBounds(event, 0, 0, 160, 800)) {
 					lion.setRequest(1);
 				}
-				if(isBounds(event, 161, 0, 160, 800)) {
+				if (isBounds(event, 161, 0, 160, 800)) {
 					lion.setRequest(2);
 				}
-				if(isBounds(event, 321, 0, 160, 800)) {
+				if (isBounds(event, 321, 0, 160, 800)) {
 					lion.setRequest(3);
 				}
 			}
@@ -127,18 +127,24 @@ public class PlayScreen extends Screen {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
 			sprite.draw(g);
-			if(sprite instanceof Car) {
+			if (sprite instanceof Car) {
 				Car car = (Car) sprite;
-				if(sprite.getY()>=810){
+				if (sprite.getY() >= 810) {
 					sprites.remove(car);
 					break;
 				}
-
+			}
+			if(sprite instanceof Truk) {
+				Truk truk = (Truk) sprite;
+				if(sprite.getY() >= 810) {
+					sprites.remove(truk);
+					break;
+				}
 			}
 		}
 		Paint paint = new Paint();
-		paint.setColor(Color.WHITE);
-		g.drawTextAlp(""+sprites.size(), 100, 100, paint);
+//		paint.setColor(Color.WHITE);
+//		g.drawTextAlp("" + sprites.size(), 100, 100, paint);
 	}
 
 	private void drawGameOverUI() {
@@ -157,7 +163,6 @@ public class PlayScreen extends Screen {
 		else
 			return false;
 	}
-
 
 	@Override
 	public void pause() {
