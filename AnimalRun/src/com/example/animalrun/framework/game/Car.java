@@ -13,12 +13,12 @@ public class Car extends Sprite {
 	private static float tick = TICK_INITIAL; // 更新速度
 	private float tickTime;
 
-	public Car(double _x, double _y, Pixmap pixmap, World world) {
+	public Car(double _x, double _y, int speed, Pixmap pixmap, World world) {
 		super(_x, _y, pixmap, world);
 		x = _x;
 		y = _y;
 		this.world = world;
-		speedY = 5;
+		speedY = speed;
 		width = 100;
 		height = 150;
 	}
@@ -58,5 +58,5 @@ public class Car extends Sprite {
 	public int getWidth() {
 		return width;
 	}
-
+	
 }

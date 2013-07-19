@@ -13,7 +13,7 @@ import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
 public class World {
-	private final int MARGIN = 30;
+	private final int MARGIN = 160;
 	private final int LEFT = 40;
 	private final int CENTER = 195;
 	private final int RIGHT = 345;
@@ -23,27 +23,53 @@ public class World {
 	private static float tick = TICK_INITIAL; // 更新速度
 	private float tickTime;
 	private LinkedList sprites;
-	private boolean flag = false; // 試験用
+//	private boolean flag = false; // 試験用
 	private ArrayList bucks = new ArrayList();
 	private int count=HAIKEI-1;
+	private int speed;
+	private int score = 0;
 
 	public World(int sc_speed) {
 		sprites = new LinkedList();
 		tickTime = 0;
+		speed = sc_speed;
 		load();
 	}
 
 	public void update(float deltaTime) {
+		int ran;
+		boolean flag = false;
 		tickTime += deltaTime;
 		while (tickTime > tick) {
 			tickTime -= tick;
+			score++;
+//			score+= 10;	//スコア表示テスト用
 			if (sprites.size() > 0) {
 				Sprite sprite = (Sprite) sprites.getLast();
 				if (sprite.getY() >= MARGIN) {
 					Random rand = new Random();
-					int ran = rand.nextInt(3);
+					
+					for(int i=0; true; i++) {	//前の障害物と同じレーンにならないようにする処理
+						ran = rand.nextInt(3);
+						switch (ran) {
+						case 0:
+							if(sprite.getX() == LEFT)	continue;
+							else flag = true;
+							break;
+						case 1:
+							if(sprite.getX() == CENTER)	continue;
+							else flag = true;
+							break;
+						case 2:
+							if(sprite.getX() == RIGHT)	continue;
+							else flag = true;
+							break;
+						}
+						if(flag) break;
+					}
+					
 					int x = LEFT;
-					switch (ran) {
+					switch (ran) {	
 					case 0:
 						x = LEFT;
 						break;
@@ -59,10 +85,10 @@ public class World {
 					case 0:
 						break;
 					case 1:
-						sprites.add(new Car(x, -150, Assets.car, this));
+						sprites.add(new Car(x, -150, speed,Assets.car, this));
 						break;
 					case 2:
-						sprites.add(new Truk(x, -300, Assets.truk, this));
+						sprites.add(new Truk(x, -300, speed,Assets.truk, this));
 						break;
 					}
 				}
@@ -77,7 +103,7 @@ public class World {
 	}
 
 	public void load() {
-		sprites.add(new Car(RIGHT, -150, Assets.car, this));
+		sprites.add(new Car(RIGHT, -150, speed,Assets.car, this));
 		bucks.add(Assets.way0);
 		bucks.add(Assets.way1);
 		bucks.add(Assets.way2);
@@ -107,6 +133,10 @@ public class World {
 
 	public LinkedList getSprites() {
 		return sprites;
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 }

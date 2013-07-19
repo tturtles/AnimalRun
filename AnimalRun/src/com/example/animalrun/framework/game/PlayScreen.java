@@ -6,7 +6,9 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
@@ -24,14 +26,17 @@ public class PlayScreen extends Screen {
 	private World world;
 	private Lion lion;
 	private LinkedList sprites;
+	private int score = 0;
 
 	public PlayScreen(Game game, int _select) {
 		super(game);
 		select = _select;
+		int speed = 0;
 		switch (select) {
 		case 3:
+			speed = 7;
 			lion = new Lion(190, 630, Assets.animal, world);
-			world = new World(5);
+			world = new World(speed);
 			break;
 		}
 	}
@@ -86,7 +91,14 @@ public class PlayScreen extends Screen {
 
 	private void updateGameOver(List<TouchEvent> touchEvents) {
 		// ゲームオーバー時のタッチ処理書き込み
-
+		int len = touchEvents.size();
+		for (int i = 0; i < len; i++) {
+			TouchEvent event = touchEvents.get(i);
+			switch (event.type) {
+			case MotionEvent.ACTION_DOWN:
+				new ScoreScreen(game);
+			}
+		}
 	}
 
 	private void updateClear(List<TouchEvent> touchEvents) {
@@ -97,9 +109,8 @@ public class PlayScreen extends Screen {
 	public void present(float deltaTime) {
 		if (state == GameState.Ready)
 			drawReadyUI();
-		if (state == GameState.Running) {
+		if (state == GameState.Running) 
 			drawRunningUI();
-		}
 		if (state == GameState.GameOver)
 			drawGameOverUI();
 		if (state == GameState.Clear)
@@ -126,6 +137,7 @@ public class PlayScreen extends Screen {
 		while (iterator.hasNext()) { // iteratorの中で次の要素がある限りtrue
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
+			if (lion.isCollision(sprite)) state = GameState.GameOver;
 			sprite.draw(g);
 			if (sprite instanceof Car) {
 				Car car = (Car) sprite;
@@ -143,12 +155,29 @@ public class PlayScreen extends Screen {
 			}
 		}
 		Paint paint = new Paint();
-//		paint.setColor(Color.WHITE);
-//		g.drawTextAlp("" + sprites.size(), 100, 100, paint);
+		paint.setColor(Color.RED);
+		paint.setTextSize(50);
+		score = world.getScore();
+		int i;
+		for(i=0; score>9; i++){
+			if(score/10<10) break;
+			else{
+				i++;
+				score /= 10;
+			}
+		}
+		
+		g.drawTextAlp("SCORE : " + world.getScore(), 200-i*15, 50, paint);
 	}
 
 	private void drawGameOverUI() {
 		// ゲームオーバー時のUI(描画系)
+		Graphics g = game.getGraphics();
+		world.draw(g);
+		Paint paint = new Paint();
+		paint.setColor(Color.RED);
+		paint.setTextSize(100);
+		g.drawTextAlp("GameOver", 0, 300, paint);
 	}
 
 	private void drawClearUI() {

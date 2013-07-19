@@ -2,6 +2,7 @@ package com.example.animalrun.framework.game;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.widget.Toast;
 
 import com.example.animalrun.framework.Graphics;
@@ -138,6 +139,7 @@ public class Lion extends Sprite {
 		}
 		return _point;
 	}
+	
 
 	public void setRequest(int _point) {
 		switch (_point) {
@@ -151,6 +153,18 @@ public class Lion extends Sprite {
 			this.request = Point.Right;
 			break;
 		}
+	}
+	
+	
+	/*
+	 * 他のスプライトと接触しているか
+	 */
+	public boolean isCollision(Sprite sprite) {
+		Rect playerRect = new Rect((int) x, (int) y, width+(int)x, height+(int)y);
+		Rect spriteRect = new Rect((int) sprite.getX(), (int) sprite.getY(),
+				(int) sprite.getWidth()+(int)sprite.getX(), (int) sprite.getHeight()+(int)sprite.getY());
+		 if(playerRect.intersect(spriteRect)) {return true;}	// //Rect同士ぶつかり合っていたらtrue
+			return false;
 	}
 
 }
