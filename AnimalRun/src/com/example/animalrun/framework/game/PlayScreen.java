@@ -18,13 +18,13 @@ import com.example.animalrun.framework.Screen;
 public class PlayScreen extends Screen {
 
 	enum GameState {
-		Ready, Running, Paused, GameOver, Clear
+		Ready, Running, Paused, GameOver
 	}
 
 	GameState state = GameState.Ready;
 	private int select = 0;
 	private World world;
-	private Lion lion;
+	private Animal animal;
 	private LinkedList sprites;
 	private int score = 0;
 
@@ -33,9 +33,19 @@ public class PlayScreen extends Screen {
 		select = _select;
 		int speed = 0;
 		switch (select) {
-		case 3:
+		case 1:
+			speed = 4;
+			animal = new Animal(190, 630, Assets.animal, world);
+			world = new World(speed);
+			break;
+		case 2:
 			speed = 7;
-			lion = new Lion(190, 630, Assets.animal, world);
+			animal = new Animal(190, 630, Assets.animal, world);
+			world = new World(speed);
+			break;
+		case 3:
+			speed = 10;
+			animal = new Animal(190, 630, Assets.animal, world);
 			world = new World(speed);
 			break;
 		}
@@ -49,10 +59,9 @@ public class PlayScreen extends Screen {
 			updateReady(touchEvents, deltaTime);
 		if (state == GameState.Running)
 			updateRunning(touchEvents, deltaTime);
-		if (state == GameState.GameOver)
+		if (state == GameState.GameOver) {
 			updateGameOver(touchEvents);
-		if (state == GameState.Clear)
-			updateClear(touchEvents);
+		}
 	}
 
 	private void updateReady(List<TouchEvent> touchEvents, float deltaTime) {
@@ -75,17 +84,17 @@ public class PlayScreen extends Screen {
 			switch (event.type) {
 			case MotionEvent.ACTION_DOWN:
 				if (isBounds(event, 0, 0, 160, 800)) {
-					lion.setRequest(1);
+					animal.setRequest(1);
 				}
 				if (isBounds(event, 161, 0, 160, 800)) {
-					lion.setRequest(2);
+					animal.setRequest(2);
 				}
 				if (isBounds(event, 321, 0, 160, 800)) {
-					lion.setRequest(3);
+					animal.setRequest(3);
 				}
 			}
 		}
-		lion.Update();
+		animal.Update(deltaTime);
 		world.update(deltaTime);
 	}
 
@@ -96,25 +105,20 @@ public class PlayScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			switch (event.type) {
 			case MotionEvent.ACTION_DOWN:
-				new ScoreScreen(game);
+				game.setScreen(new ScoreScreen(game, world.getScore()));
+				break;
 			}
 		}
-	}
-
-	private void updateClear(List<TouchEvent> touchEvents) {
-		// ゲームクリア時のタッチ処理書き込み
 	}
 
 	@Override
 	public void present(float deltaTime) {
 		if (state == GameState.Ready)
 			drawReadyUI();
-		if (state == GameState.Running) 
+		if (state == GameState.Running)
 			drawRunningUI();
 		if (state == GameState.GameOver)
 			drawGameOverUI();
-		if (state == GameState.Clear)
-			drawClearUI();
 	}
 
 	private void drawReadyUI() {
@@ -131,14 +135,24 @@ public class PlayScreen extends Screen {
 		// ゲーム中のUI(描画系)
 		Graphics g = game.getGraphics();
 		world.draw(g);
-		lion.draw(g);
+		animal.draw(g);
 		LinkedList sprites = world.getSprites();
 		Iterator iterator = sprites.iterator(); // Iterator=コレクション内の要素を順番に取り出す方法
 		while (iterator.hasNext()) { // iteratorの中で次の要素がある限りtrue
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
-			if (lion.isCollision(sprite)) state = GameState.GameOver;
 			sprite.draw(g);
+			if (animal.isCollision(sprite)) {
+				if (sprite instanceof Esa) {
+					Esa esa = (Esa) sprite;
+					esa.Use(animal);
+					if(!esa.getFlag()) state = GameState.GameOver;
+					sprites.remove(esa);
+				} else state = GameState.GameOver;
+				break;
+			} else if(animal.getflag()){
+
+			}
 			if (sprite instanceof Car) {
 				Car car = (Car) sprite;
 				if (sprite.getY() >= 810) {
@@ -146,9 +160,9 @@ public class PlayScreen extends Screen {
 					break;
 				}
 			}
-			if(sprite instanceof Truk) {
+			if (sprite instanceof Truk) {
 				Truk truk = (Truk) sprite;
-				if(sprite.getY() >= 810) {
+				if (sprite.getY() >= 810) {
 					sprites.remove(truk);
 					break;
 				}
@@ -159,29 +173,26 @@ public class PlayScreen extends Screen {
 		paint.setTextSize(50);
 		score = world.getScore();
 		int i;
-		for(i=0; score>9; i++){
-			if(score/10<10) break;
-			else{
+		for (i = 0; score > 9; i++) {
+			if (score / 10 < 10)
+				break;
+			else {
 				i++;
 				score /= 10;
 			}
 		}
-		
-		g.drawTextAlp("SCORE : " + world.getScore(), 200-i*15, 50, paint);
+
+		g.drawTextAlp("SCORE : " + world.getScore(), 200 - i * 15, 50, paint);
 	}
 
 	private void drawGameOverUI() {
 		// ゲームオーバー時のUI(描画系)
 		Graphics g = game.getGraphics();
-		world.draw(g);
+		g.drawPixmap(Assets.way, 0, 0);
 		Paint paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setTextSize(100);
 		g.drawTextAlp("GameOver", 0, 300, paint);
-	}
-
-	private void drawClearUI() {
-		// ゲームクリア時のUI(描画系)
 	}
 
 	private boolean isBounds(TouchEvent event, int x, int y, int width,

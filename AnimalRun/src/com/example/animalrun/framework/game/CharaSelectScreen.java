@@ -17,7 +17,7 @@ public class CharaSelectScreen extends Screen {
 	}
 
 	private int select = 0;
-	
+
 	@Override
 	public void update(float deltaTime) {
 		Graphics g = game.getGraphics();
@@ -29,11 +29,9 @@ public class CharaSelectScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (isBounds(event, 0, 100, 480, 200)) {
-//					select = 1;
-					select = 3;
+					select = 1;
 				} else if (isBounds(event, 0, 300, 480, 200)) {
-//					select = 2;
-					select = 3;
+					select = 2;
 				} else if (isBounds(event, 0, 500, 480, 200)) {
 					select = 3;
 				}
@@ -57,9 +55,9 @@ public class CharaSelectScreen extends Screen {
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
 		g.drawRect(0, 0, 480, 800, Color.BLACK);
-		g.drawPixmap(Assets.bt_datyou, 0, 100);
-		g.drawPixmap(Assets.bt_kapipara, 0, 300);
-		g.drawPixmap(Assets.bt_lion, 0, 500);
+		g.drawPixmap(Assets.bt_kapipara, 0, 100);
+		g.drawPixmap(Assets.bt_lion, 0, 300);
+		g.drawPixmap(Assets.bt_datyou, 0, 500);
 	}
 
 	@Override

@@ -43,12 +43,11 @@ public class World {
 		while (tickTime > tick) {
 			tickTime -= tick;
 			score++;
-//			score+= 10;	//スコア表示テスト用
 			if (sprites.size() > 0) {
 				Sprite sprite = (Sprite) sprites.getLast();
 				if (sprite.getY() >= MARGIN) {
 					Random rand = new Random();
-					
+
 					for(int i=0; true; i++) {	//前の障害物と同じレーンにならないようにする処理
 						ran = rand.nextInt(3);
 						switch (ran) {
@@ -67,9 +66,9 @@ public class World {
 						}
 						if(flag) break;
 					}
-					
+
 					int x = LEFT;
-					switch (ran) {	
+					switch (ran) {
 					case 0:
 						x = LEFT;
 						break;
@@ -81,14 +80,23 @@ public class World {
 						break;
 					}
 					ran = rand.nextInt(3);
-					switch (ran) {
+					switch (2) {
 					case 0:
-						break;
-					case 1:
 						sprites.add(new Car(x, -150, speed,Assets.car, this));
 						break;
-					case 2:
+					case 1:
 						sprites.add(new Truk(x, -300, speed,Assets.truk, this));
+						break;
+					case 2:
+						ran = rand.nextInt(2);
+						switch (ran) {
+						case 0:
+							sprites.add(new Esa(x, -100, speed, true, Assets.esa_true, this));
+							break;
+						case 1:
+							sprites.add(new Esa(x, -100, speed, false, Assets.esa_false, this));
+							break;
+						}
 						break;
 					}
 				}
@@ -117,8 +125,6 @@ public class World {
 	}
 
 	public void draw(Graphics g) {
-//		g.drawPixmap(Assets.way, 0, 0);
-
 		int l = HAIKEI-1;
 		for(int i=count; l>-1; i--, l--) {
 			if(i<0) i = HAIKEI-1;

@@ -11,8 +11,10 @@ import com.example.animalrun.framework.Input.TouchEvent;
 
 public class ScoreScreen extends Screen {
 
-	public ScoreScreen(Game game) {
+	private int score = 0;
+	public ScoreScreen(Game game, int score) {
 		super(game);
+		this.score = score;
 	}
 
 	@Override

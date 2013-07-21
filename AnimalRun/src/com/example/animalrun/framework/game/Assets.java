@@ -24,4 +24,7 @@ public class Assets {
 	public static Pixmap way7;
 	public static Pixmap way8;
 	public static Pixmap way9;
+	public static Pixmap esa_true;
+	public static Pixmap esa_false;
+	public static Pixmap animal_sp;
 }
