@@ -21,7 +21,7 @@ public abstract class Sprite {
 	public abstract void Update();
 
 	public void draw(Graphics g) {
-		g.drawPixmap(image, (int) x, (int) x);
+		g.drawPixmap(image, (int) x, (int) y);
 	}
 
 	/*
