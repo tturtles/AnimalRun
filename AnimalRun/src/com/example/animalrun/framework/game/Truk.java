@@ -13,8 +13,8 @@ public class Truk extends Sprite {
 	private static float tick = TICK_INITIAL; // 更新速度
 	private float tickTime;
 
-	public Truk(double _x, double _y, int speed, Pixmap pixmap, World world) {
-		super(_x, _y, pixmap, world);
+	public Truk(double _x, double _y, int speed, Pixmap pixmap) {
+		super(_x, _y, pixmap);
 		x = _x;
 		y = _y;
 		this.world = world;

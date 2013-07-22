@@ -12,9 +12,9 @@ public abstract class Sprite {
 	protected int height;
 	protected Pixmap image;
 
-	public Sprite(double _x, double _y, Pixmap pixmap, World world) {
-		x = _x;
-		y = _y;
+	public Sprite(double x, double y, Pixmap pixmap) {
+		this.x = x;
+		this.y = y;
 		image = pixmap;
 	}
 

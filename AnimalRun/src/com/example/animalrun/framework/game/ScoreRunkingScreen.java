@@ -28,6 +28,8 @@ public class ScoreRunkingScreen extends Screen {
 			}
 		}
 	}
+
+
 	private boolean isBounds(TouchEvent event, int x, int y, int width,
 			int height) {
 		if (event.x > x && event.x < x + width - 1 && event.y > y

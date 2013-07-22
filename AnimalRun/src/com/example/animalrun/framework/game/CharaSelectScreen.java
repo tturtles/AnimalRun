@@ -35,7 +35,7 @@ public class CharaSelectScreen extends Screen {
 				} else if (isBounds(event, 0, 500, 480, 200)) {
 					select = 3;
 				}
-				if(select>0) {
+				if (select > 0) {
 					game.setScreen(new PlayScreen(game, select));
 				}
 			}

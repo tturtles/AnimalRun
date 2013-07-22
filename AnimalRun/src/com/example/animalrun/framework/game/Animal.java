@@ -1,9 +1,6 @@
 package com.example.animalrun.framework.game;
 
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
-import android.widget.Toast;
 
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
@@ -25,17 +22,15 @@ public class Animal extends Sprite {
 	Point point = Point.Center;
 	Point request = Point.None;
 
-	private World world;
-	private boolean flag = false;
+	private boolean flag = false; // true = 無敵状態, false = 通常状態
 
-	public Animal(double _x, double _y, Pixmap pixmap, World _world) {
-		super(_x, _y, pixmap, _world);
-		x = _x;
-		y = _y;
+	public Animal(double x, double y, Pixmap pixmap) {
+		super(x, y, pixmap);
+		this.x = x;
+		this.y = y;
 		width = 100;
 		height = 150;
 		speed = 10;
-		world = _world;
 		vx = 0;
 	}
 
@@ -108,51 +103,7 @@ public class Animal extends Sprite {
 		vx = speed;
 	}
 
-	/*
-	 * 以下getter,setter群
-	 */
-	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getPoint() {
-		int _point;
-		switch (point) {
-		case Left:
-			_point = 1;
-			break;
-		case Center:
-			_point = 2;
-			break;
-		case Right:
-			_point = 3;
-			break;
-		default:
-			_point = 0;
-		}
-		return _point;
-	}
-
+	// タップされたレーンへ移動をリクエスト
 	public void setRequest(int _point) {
 		switch (_point) {
 		case 1:
@@ -171,26 +122,24 @@ public class Animal extends Sprite {
 	 * 他のスプライトと接触しているか
 	 */
 	public boolean isCollision(Sprite sprite) {
-		if (!flag) {
-			Rect playerRect = new Rect((int) x, (int) y, width + (int) x,
-					height + (int) y);
-			Rect spriteRect = new Rect((int) sprite.getX(),
-					(int) sprite.getY(), (int) sprite.getWidth()
-							+ (int) sprite.getX(), (int) sprite.getHeight()
-							+ (int) sprite.getY());
-			if (playerRect.intersect(spriteRect)) {
-				return true;
-			} // //Rect同士ぶつかり合っていたらtrue
-			return false;
-		}
+		Rect playerRect = new Rect((int) x, (int) y, width + (int) x, height
+				+ (int) y);
+		Rect spriteRect = new Rect((int) sprite.getX(), (int) sprite.getY(),
+				(int) sprite.getWidth() + (int) sprite.getX(),
+				(int) sprite.getHeight() + (int) sprite.getY());
+		if (playerRect.intersect(spriteRect)) {
+			return true;
+		} // //Rect同士ぶつかり合っていたらtrue
 		return false;
 	}
 
+	// 無敵状態にする
 	public void setFlag() {
 		flag = true;
-		image = Assets.animal_sp;
+		image = Assets.animal_sp; // 無敵状態は画像変えるよ！
 	}
 
+	// 無敵状態かどうか返す true = 無敵状態, false = 通常状態
 	public boolean getflag() {
 		return flag;
 	}

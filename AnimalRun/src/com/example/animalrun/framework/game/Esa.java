@@ -14,11 +14,10 @@ public class Esa extends Sprite {
 	private static float tick = TICK_INITIAL; // 更新速度
 	private float tickTime;
 
-	public Esa(double _x, double _y, int speed, boolean flag,Pixmap pixmap, World world) {
-		super(_x, _y, pixmap, world);
-		x = _x;
-		y = _y;
-		this.world = world;
+	public Esa(double x, double y, int speed, boolean flag,Pixmap pixmap) {
+		super(x, y, pixmap);
+		this.x = x;
+		this.y = y;
 		this.flag = flag;
 		speedY = speed;
 		width = 100;
@@ -40,34 +39,6 @@ public class Esa extends Sprite {
 		} else {	//偽物のエサの場合
 		}
 	}
-
-	/*
-	 * 以下getter,setter群
-	 */
-	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
 
 	public boolean getFlag() {
 		return flag;
