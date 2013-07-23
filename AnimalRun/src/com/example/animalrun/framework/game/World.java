@@ -95,15 +95,23 @@ public class World {
 						sprites.add(new Truk(x, -300, speed, Assets.truk));
 						break;
 					case 2:
-						ran = rand.nextInt(2);
+						ran = rand.nextInt(4);
 						switch (ran) {
 						case 0:
 							sprites.add(new Esa(x, -100, speed, true,
-									Assets.esa_true));
+									Assets.esa1_true));
 							break;
 						case 1:
 							sprites.add(new Esa(x, -100, speed, false,
-									Assets.esa_false));
+									Assets.esa1_false));
+							break;
+						case 2:
+							sprites.add(new Esa(x, -100, speed, true,
+									Assets.esa2_true));
+							break;
+						case 3:
+							sprites.add(new Esa(x, -100, speed, false,
+									Assets.esa2_false));
 							break;
 						}
 						break;
