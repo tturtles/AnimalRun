@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.Button;
 
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
@@ -28,11 +29,13 @@ public class World {
 	private int count = HAIKEI - 1;
 	private int speed;
 	private int score = 0;
+	private int select = 0;
 
-	public World(int sc_speed) {
+	public World(int speed, int select) {
 		sprites = new LinkedList();
 		tickTime = 0;
-		speed = sc_speed;
+		this.speed = speed;
+		this.select = select;
 		load();
 	}
 

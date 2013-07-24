@@ -36,19 +36,17 @@ public class PlayScreen extends Screen {
 		case 1:		//カピパラ選択時
 			speed = 4;
 			animal = new Animal(190, 630, Assets.animal);
-			world = new World(speed);
 			break;
 		case 2:		//ライオン選択時
 			speed = 7;
 			animal = new Animal(190, 630, Assets.animal);
-			world = new World(speed);
 			break;
 		case 3:		//ダチョウ選択時
 			speed = 10;
 			animal = new Animal(190, 630, Assets.animal);
-			world = new World(speed);
 			break;
 		}
+		world = new World(speed, _select);
 	}
 
 	@Override
