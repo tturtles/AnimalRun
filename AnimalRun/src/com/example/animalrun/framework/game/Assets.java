@@ -20,4 +20,6 @@ public class Assets {
 	public static Pixmap esa1_false;
 	public static Pixmap esa2_true;
 	public static Pixmap esa2_false;
+	public static Pixmap bt_back;
+	public static Pixmap bt_retry;
 }
