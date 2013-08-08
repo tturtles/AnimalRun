@@ -27,11 +27,11 @@ public class StartScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (isBounds(event, 80, 350, 320, 100)) {
+				if (isBounds(event, 80, 400, 250, 100)) {
 					game.setScreen(new CharaSelectScreen(game));
 				} else if(isBounds(event, 80, 500, 320, 100)) {
 					game.setScreen(new ScoreRunkingScreen(game));
-				} else if(isBounds(event, 80, 650, 320, 100)) {
+				} else if(isBounds(event, 80, 600, 260, 100)) {
 					System.exit(0);
 				}
 			}
@@ -50,10 +50,11 @@ public class StartScreen extends Screen {
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawPixmap(Assets.title, 80, 30);
-		g.drawPixmap(Assets.bt_start, 80, 350);
+		g.drawRect(0, 0, 480, 800, Color.BLACK);
+		g.drawPixmap(Assets.buck_StartScreen, 0, 0);
+		g.drawPixmap(Assets.bt_start, 80, 400);
 		g.drawPixmap(Assets.bt_score, 80, 500);
-		g.drawPixmap(Assets.bt_close, 80, 650);
+		g.drawPixmap(Assets.bt_close, 80, 600);
 	}
 
 	@Override

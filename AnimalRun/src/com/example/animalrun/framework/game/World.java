@@ -32,6 +32,10 @@ public class World {
 	private int score = 0;
 	private int select = 0;
 	private Pixmap Image_esatrue;
+	public int getSelect() {
+		return select;
+	}
+
 	private Pixmap Image_esafalse;
 
 	private ArrayList list;
@@ -46,7 +50,6 @@ public class World {
 	}
 
 	public void load() {
-//		sprites.add(new Car(RIGHT, -150, speed, Assets.car));
 		for (int i = 0; i < 5; i++) {
 			bucks.add(Assets.way0);
 			bucks.add(Assets.way1);

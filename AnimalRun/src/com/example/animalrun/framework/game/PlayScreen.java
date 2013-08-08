@@ -103,7 +103,7 @@ public class PlayScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			switch (event.type) {
 			case MotionEvent.ACTION_DOWN:
-				game.setScreen(new ScoreScreen(game, world.getScore()));
+				game.setScreen(new ScoreScreen(game, world));
 				break;
 			}
 		}
