@@ -12,7 +12,7 @@ public class Animal extends Sprite {
 	}
 
 	private static final float TICK_INITIAL = 5.0f;
-	private static float tick = TICK_INITIAL; // 更新速度
+	private static float tick = 0; // 更新速度
 
 	private double vx;
 	private double speed; // 移動速度
@@ -33,6 +33,9 @@ public class Animal extends Sprite {
 		speed = 10;
 		vx = 0;
 	}
+	public float gettick() {
+		return tick;
+	}
 
 	@Override
 	public void Update() {
@@ -47,6 +50,7 @@ public class Animal extends Sprite {
 			}
 		} else {
 			image = Assets.animal;
+			tick = 0;
 		}
 		switch (request) {
 		case Left: // 左レーンをタップされた場合
@@ -137,6 +141,7 @@ public class Animal extends Sprite {
 	public void setFlag() {
 		flag = true;
 		image = Assets.animal_sp; // 無敵状態は画像変えるよ！
+		tick += TICK_INITIAL;
 	}
 
 	// 無敵状態かどうか返す true = 無敵状態, false = 通常状態

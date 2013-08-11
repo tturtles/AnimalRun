@@ -21,6 +21,7 @@ public class PlayScreen extends Screen {
 	enum GameState {
 		Ready, Running, Paused, GameOver
 	}
+
 	GameState state = GameState.Ready;
 	private int select = 0;
 	private World world;
@@ -33,15 +34,15 @@ public class PlayScreen extends Screen {
 		select = _select;
 		int speed = 0;
 		switch (select) {
-		case 1:		//カピパラ選択時
+		case 1: // カピパラ選択時
 			speed = 4;
 			animal = new Animal(190, 630, Assets.animal);
 			break;
-		case 2:		//ライオン選択時
+		case 2: // ライオン選択時
 			speed = 7;
 			animal = new Animal(190, 630, Assets.animal);
 			break;
-		case 3:		//ダチョウ選択時
+		case 3: // ダチョウ選択時
 			speed = 10;
 			animal = new Animal(190, 630, Assets.animal);
 			break;
@@ -140,28 +141,28 @@ public class PlayScreen extends Screen {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
 			sprite.draw(g);
-			if (animal.isCollision(sprite)) {	//衝突した場合
-				if (sprite instanceof Esa) {	//それがエサの場合
+			if (animal.isCollision(sprite)) { // 衝突した場合
+				if (sprite instanceof Esa) { // それがエサの場合
 					Esa esa = (Esa) sprite;
-					esa.Use(animal);			//エサの効果発動！
-					if(!esa.getFlag() && !animal.getflag()) state = GameState.GameOver;		//エサが偽物且つ動物が無敵状態じゃないときゲームオーバー
-					sprites.remove(esa);
-				} else if(!animal.getflag())state = GameState.GameOver;		//エサ以外に衝突且つ動物が無敵状態じゃない場合ゲームオーバー
+					if (esa.getFlag()) {
+						esa.Use(animal); // エサの効果発動！
+						sprites.remove(esa);
+					} else if (!animal.getflag())
+						state = GameState.GameOver; // エサが偽物且つ動物が無敵状態じゃないときゲームオーバー
+					else
+						esa.crash();
+					break;
+				} else if (!animal.getflag())
+					state = GameState.GameOver; // エサ以外に衝突且つ動物が無敵状態じゃない場合ゲームオーバー
+				Sprite _sprite = (Sprite) sprite;
+				_sprite.crash();
 				break;
 			}
-			if (sprite instanceof Car) {	//sprite（障害物）の中身がクルマの場合
-				Car car = (Car) sprite;
-				if (sprite.getY() >= 810) {
-					sprites.remove(car);
-					break;
-				}
-			}
-			if (sprite instanceof Truk) {	//sprite（障害物）の中身がトラックの場合
-				Truk truk = (Truk) sprite;
-				if (sprite.getY() >= 810) {
-					sprites.remove(truk);
-					break;
-				}
+			
+			if (Judg_remove(sprite)) {
+				Sprite _sprite = (Sprite) sprite;
+				sprites.remove(_sprite);
+				break;
 			}
 		}
 		Paint paint = new Paint();
@@ -180,6 +181,15 @@ public class PlayScreen extends Screen {
 		g.drawTextAlp("SCORE : " + world.getScore(), 200 - i * 15, 50, paint);
 	}
 
+	private boolean Judg_remove(Sprite sprite) {
+		if (sprite.getX() < 0 - sprite.getWidth() || sprite.getX() > 480
+				|| sprite.getY() < 0 - sprite.getHeight()
+				|| sprite.getY() > 810)
+			return true;
+		else
+			return false;
+	}
+
 	private void drawGameOverUI() {
 		// ゲームオーバー時のUI(描画系)
 		Graphics g = game.getGraphics();
@@ -190,7 +200,7 @@ public class PlayScreen extends Screen {
 		g.drawTextAlp("GameOver", 0, 300, paint);
 	}
 
-	//タップ時の当たり判定 目標がタップされた場合true、違う場合false
+	// タップ時の当たり判定 目標がタップされた場合true、違う場合false
 	private boolean isBounds(TouchEvent event, int x, int y, int width,
 			int height) {
 		if (event.x > x && event.x < x + width - 1 && event.y > y

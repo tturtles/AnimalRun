@@ -6,8 +6,8 @@ import com.example.animalrun.framework.Pixmap;
 public class Esa extends Sprite {
 
 	private World world;
-	private int speedY;
 	private int vy;
+	private int vx;
 	private boolean flag;
 
 	private static final float TICK_INITIAL = 0.5f;
@@ -19,6 +19,7 @@ public class Esa extends Sprite {
 		this.x = x;
 		this.y = y;
 		this.flag = flag;
+		this.speedX = 0;
 		speedY = speed;
 		width = 100;
 		height = 100;
@@ -27,6 +28,8 @@ public class Esa extends Sprite {
 	public void Update() {
 		vy = speedY;
 		y += vy;
+		vx = speedX;
+		x += vx;
 	}
 
 	public void draw(Graphics g, float deltaTime) {
@@ -34,13 +37,14 @@ public class Esa extends Sprite {
 	}
 
 	public void Use(Animal animal) {
-		if(flag) {	//本物のエサの場合
 			animal.setFlag();
-		} else {	//偽物のエサの場合
-		}
 	}
 
 	public boolean getFlag() {
 		return flag;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
 	}
 }

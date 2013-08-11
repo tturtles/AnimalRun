@@ -6,8 +6,8 @@ import com.example.animalrun.framework.Pixmap;
 public class Truk extends Sprite {
 
 	private World world;
-	private int speedY;
 	private int vy;
+	private int vx;
 
 	private static final float TICK_INITIAL = 0.5f;
 	private static float tick = TICK_INITIAL; // 更新速度
@@ -26,6 +26,8 @@ public class Truk extends Sprite {
 	public void Update() {
 		vy = speedY;
 		y += vy;
+		vx = speedX;
+		x += vx;
 	}
 
 	public void draw(Graphics g, float deltaTime) {
