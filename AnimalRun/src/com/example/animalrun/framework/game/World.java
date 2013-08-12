@@ -100,7 +100,7 @@ public class World {
 
 		Random rand = new Random();
 		ran = rand.nextInt(100);
-		if (ran < 60) {
+		if (ran < 90) {
 			ran = rand.nextInt(2);
 			if (ran == 0)
 				sprites.add(new Car(x, -150, speed, Assets.car));
