@@ -164,7 +164,8 @@ public class AndroidGraphics implements Graphics {
 	public void drawTextAlp(String line, float x, float y, Paint paint) {
 		canvas.drawText(line, x, y, paint);
 	}
-
+	 
+	
 	void Arrow(float x1, float y1, float x2, float y2, float x3, float y3,
 			int color) {
 		Paint paint = new Paint();
@@ -176,4 +177,10 @@ public class AndroidGraphics implements Graphics {
 		canvas.drawPath(path, paint);
 	}
 
+	public void drawTextAlp(String line, float x, float y, int color, float size) {
+		Paint paint = new Paint();
+		paint.setColor(color);
+		paint.setTextSize(size);
+		canvas.drawText(line, x, y, paint);
+	}
 }

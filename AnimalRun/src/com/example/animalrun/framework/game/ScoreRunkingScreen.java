@@ -42,7 +42,7 @@ public class ScoreRunkingScreen extends Screen {
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawRect(0, 0, 440, 800, Color.BLACK);
+		g.drawRect(0, 0, 481, 801, Color.BLACK);
 		g.drawPixmap(Assets.bt_back, 320, 680);
 	}
 

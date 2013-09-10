@@ -34,4 +34,6 @@ public interface Graphics {
     
     public void drawTextAlp(String line, float x, float y, Paint paint);
     
+    public void drawTextAlp(String line, float x, float y, int color, float size);
+    
 }
