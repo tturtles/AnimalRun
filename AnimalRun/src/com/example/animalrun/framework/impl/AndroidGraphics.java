@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint.Style;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -87,6 +88,7 @@ public class AndroidGraphics implements Graphics {
 		paint.setColor(color);
 		canvas.drawPoint(x, y, paint);
 	}
+	
 
 	public void drawLine(int x, int y, int x2, int y2, int color) {
 		paint.setColor(color);
@@ -118,6 +120,16 @@ public class AndroidGraphics implements Graphics {
 	public void drawPixmap(Pixmap pixmap, int x, int y) {
 		canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, x, y, null);
 	}
+	
+	public void drawPixmap(Pixmap pixmap, int x, int y, int angle) {
+		// 画像が回転するロジック
+		Matrix mtx = new Matrix();
+		mtx.postRotate(angle);
+		mtx.postTranslate(x, y);
+		mtx.postTranslate(100/2,150/2);
+		
+		canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, mtx, null);
+	}
 
 	public int getWidth() {
 		return frameBuffer.getWidth();
@@ -128,34 +140,6 @@ public class AndroidGraphics implements Graphics {
 	}
 
 	@Override
-	public void drawController(int cx, int cy, int cr, Paint circle_paint,	int color, int color2, int direction) {
-		int cw = 70;
-		canvas.drawCircle(cx, cy, cr, circle_paint);
-		switch (direction) {
-		case 1:
-			Arrow(cx + cr, cy, cx + cr - cw, cy - cw / 2, cx + cr - cw, cy + cw
-					/ 2, color2); // right
-			Arrow(cx - cr, cy, cx - cr + cw, cy - cw / 2, cx - cr + cw,
-					cy + cw / 2, color); // left
-			break;
-			
-		case 2:
-			Arrow(cx - cr, cy, cx - cr + cw, cy - cw / 2, cx - cr + cw,
-					cy + cw / 2, color2); // left
-			Arrow(cx + cr, cy, cx + cr - cw, cy - cw / 2, cx + cr - cw, cy + cw
-					/ 2, color); // right
-			break;
-		default:
-			Arrow(cx + cr, cy, cx + cr - cw, cy - cw / 2, cx + cr - cw, cy + cw
-					/ 2, color); // right
-			Arrow(cx - cr, cy, cx - cr + cw, cy - cw / 2, cx - cr + cw,
-					cy + cw / 2, color); // left
-			break;
-		}
-		paint.setColor(color);
-		Path path = new Path();
-		canvas.drawPath(path, paint);
-	}
 
 	public void drawCircle(int cx, int cy, int cr, Paint circle_paint) {
 		canvas.drawCircle(cx, cy, cr, circle_paint);

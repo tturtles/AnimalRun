@@ -100,14 +100,16 @@ public class World {
 
 		Random rand = new Random();
 		ran = rand.nextInt(100);
-		if (ran < 90) {
+//		if (ran < 90) {
+			if (ran < 50) {
 			ran = rand.nextInt(2);
 			if (ran == 0)
 				sprites.add(new Car(x, -150, speed, Assets.car));
 			else
 				sprites.add(new Truk(x, -300, speed, Assets.truk));
 		} else {
-			ran = rand.nextInt(2);
+//			ran = rand.nextInt(2);
+			ran = rand.nextInt(1);
 			if (ran == 0)
 				sprites.add(new Esa(x, -100, speed, true, Image_esatrue));
 			else

@@ -30,10 +30,6 @@ public class Truk extends Sprite {
 		x += vx;
 	}
 
-	public void draw(Graphics g, float deltaTime) {
-		g.drawPixmap(Assets.animal, (int) x, (int) y);
-	}
-
 	/*
 	 * 以下getter,setter群
 	 */

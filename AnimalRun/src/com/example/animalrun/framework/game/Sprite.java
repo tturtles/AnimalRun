@@ -16,6 +16,14 @@ public abstract class Sprite {
 	protected boolean flag_crash = false;
 	protected int speedX;
 	protected int speedY;
+	
+	protected boolean flag=false;
+	protected int angle=0;
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
 
 	public Sprite(double x, double y, Pixmap pixmap) {
 		this.x = x;
@@ -26,7 +34,14 @@ public abstract class Sprite {
 	public abstract void Update();
 
 	public void draw(Graphics g) {
-		g.drawPixmap(image, (int) x, (int) y);
+		if(flag) {
+			// 回転する描画
+			g.drawPixmap(image, (int)x, (int)y, angle);
+			angle+=20;
+		} else {
+			g.drawPixmap(image, (int) x, (int) y);
+			angle = 0;
+		}
 	}
 
 	/*
@@ -63,8 +78,8 @@ public abstract class Sprite {
 	public void crash() {
 		Random rand = new Random();
 		int ran = rand.nextInt(2);
-		if(ran==0) this.speedX = 10;
-		else this.speedX = -10;
+//		if(ran==0) this.speedX = 10;
+//		else this.speedX = -10;
 		this.speedY = -30;
 	}
 

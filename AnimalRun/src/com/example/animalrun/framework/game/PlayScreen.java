@@ -26,7 +26,6 @@ public class PlayScreen extends Screen {
 	private int select = 0;
 	private World world;
 	private Animal animal;
-	private LinkedList sprites;
 	private int score = 0;
 
 	public PlayScreen(Game game, int _select) {
@@ -156,6 +155,7 @@ public class PlayScreen extends Screen {
 					state = GameState.GameOver; // エサ以外に衝突且つ動物が無敵状態じゃない場合ゲームオーバー
 				Sprite _sprite = (Sprite) sprite;
 				_sprite.crash();
+				_sprite.setFlag(true);
 				break;
 			}
 			
