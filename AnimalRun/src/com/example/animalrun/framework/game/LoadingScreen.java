@@ -35,6 +35,7 @@ public class LoadingScreen extends Screen {
 		Assets.bt_retry = g.newPixmap("bt_retry.png", PixmapFormat.ARGB4444);
 		Assets.bt_title = g.newPixmap("bt_title.png", PixmapFormat.ARGB4444);
 		Assets.buck_StartScreen = g.newPixmap("StartScreenImage.png", PixmapFormat.ARGB4444);
+		Assets.walker=g.newPixmap("walker.png", PixmapFormat.ARGB4444);
 		game.setScreen(new StartScreen(game));
 	}
 
