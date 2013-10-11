@@ -20,6 +20,7 @@ public class World {
 	private final int LEFT = 40;
 	private final int CENTER = 195;
 	private final int RIGHT = 345;
+
 	private final int HAIKEI = 10;
 
 	private static final float TICK_INITIAL = 0.1f;
@@ -32,11 +33,11 @@ public class World {
 	private int score = 0;
 	private int select = 0;
 	private Pixmap Image_esatrue;
+	private Pixmap Image_esafalse;
+
 	public int getSelect() {
 		return select;
 	}
-
-	private Pixmap Image_esafalse;
 
 	private ArrayList list;
 	private int list_count = 0;
@@ -100,13 +101,15 @@ public class World {
 
 		Random rand = new Random();
 		ran = rand.nextInt(100);
-		if (ran < 90) {
+		if (ran>20 && ran< 90) {
 			ran = rand.nextInt(2);
 			if (ran == 0)
 				sprites.add(new Car(x, -150, speed, Assets.car));
 			else
 				sprites.add(new Truk(x, -300, speed, Assets.truk));
-		} else {
+    	}else if(ran<20){
+    		    sprites.add(new Walker(speed, Assets.walker));
+		}else{
 			ran = rand.nextInt(2);
 			if (ran == 0)
 				sprites.add(new Esa(x, -100, speed, true, Image_esatrue));
