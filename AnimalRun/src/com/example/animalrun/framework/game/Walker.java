@@ -22,8 +22,10 @@ public class Walker extends Sprite {
 		switch(run){
 	       case 1:x=0;
 	              y=-30;
+	              break;
 	       case 2:x=400;
 	              y=-30;
+	              break;
 	       }
 		this.world = world;
 		speedY = speed;
