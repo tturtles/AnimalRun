@@ -1,28 +1,22 @@
 package com.example.animalrun.framework.game;
 
-import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
 public class Esa extends Sprite {
 
-	private World world;
 	private int vy;
 	private int vx;
 	private boolean flag;
 
-	private static final float TICK_INITIAL = 0.5f;
-	private static float tick = TICK_INITIAL; // 更新速度
-	private float tickTime;
-
-	public Esa(double x, double y, int speed, boolean flag,Pixmap pixmap) {
-		super(x, y, pixmap);
-		this.x = x;
-		this.y = y;
-		this.flag = flag;
-		this.speedX = 0;
+	public Esa(double x,int speed, boolean flag, Pixmap pixmap) {
+		super(pixmap);
 		speedY = speed;
 		width = 100;
 		height = 100;
+		this.x = x;
+		this.y = -height;
+		this.flag = flag;
+		this.speedX = 0;
 	}
 
 	public void Update() {
@@ -30,10 +24,6 @@ public class Esa extends Sprite {
 		y += vy;
 		vx = speedX;
 		x += vx;
-	}
-
-	public void draw(Graphics g, float deltaTime) {
-		g.drawPixmap(Assets.animal, (int) x, (int) y);
 	}
 
 	public void Use(Animal animal) {

@@ -25,7 +25,7 @@ public class Animal extends Sprite {
 	private boolean flag = false; // true = 無敵状態, false = 通常状態
 
 	public Animal(double x, double y, Pixmap pixmap) {
-		super(x, y, pixmap);
+		super(pixmap);
 		this.x = x;
 		this.y = y;
 		width = 100;

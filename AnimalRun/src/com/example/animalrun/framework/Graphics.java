@@ -26,7 +26,6 @@ public interface Graphics {
     
     public void drawPixmap(Pixmap pixmap, int x, int y, int angle) ;
     
-
     public void drawCircle(int cx, int cy, int cr, Paint circle_paint);
 
     public int getWidth();

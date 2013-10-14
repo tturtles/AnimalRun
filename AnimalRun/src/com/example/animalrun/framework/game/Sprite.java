@@ -1,9 +1,6 @@
 package com.example.animalrun.framework.game;
 
-import java.util.Random;
-
 import android.graphics.Rect;
-
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
@@ -20,16 +17,11 @@ public abstract class Sprite {
 	protected boolean flag = false;
 	protected int angle = 0;
 
-	public void setFlag(boolean flag) {
-		this.flag = flag;
-	}
 
-	public Sprite(double x, double y, Pixmap pixmap) {
-		this.x = x;
-		this.y = y;
-		image = pixmap;
+	public Sprite(Pixmap pixmap) {
+		this.image = pixmap;
 	}
-
+	
 	public abstract void Update();
 
 	public void draw(Graphics g) {
@@ -41,7 +33,7 @@ public abstract class Sprite {
 			angle = 0;
 		}
 	}
-
+	
 	/*
 	 * 他のスプライトとの当たり判定
 	 */
@@ -55,6 +47,10 @@ public abstract class Sprite {
 			return true;
 		} // //Rect同士ぶつかり合っていたらtrue
 		return false;
+	}
+	
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 
 	public double getX() {

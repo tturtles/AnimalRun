@@ -7,13 +7,9 @@ import java.util.Random;
 
 public class Walker extends Sprite {
 
-	private World world;
 	private int vy;
 	private int vx;
 
-	private static final float TICK_INITIAL = 0.5f;
-	private static float tick = TICK_INITIAL; // 更新速度
-	private float tickTime;
     int run;
 	public Walker(int speed, Pixmap pixmap) {
 		super(pixmap);
@@ -27,7 +23,6 @@ public class Walker extends Sprite {
 	              y=-30;
 	              break;
 	       }
-		this.world = world;
 		speedY = speed;
 		width = 50;
 		height = 50;

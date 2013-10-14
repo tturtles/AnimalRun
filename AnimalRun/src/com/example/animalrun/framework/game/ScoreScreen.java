@@ -30,6 +30,7 @@ public class ScoreScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (isBounds(event, 20, 650, 140, 100)) {
+					game.chengeEditText(false);
 					game.setScreen(new PlayScreen(game, select));
 				}
 				if (isBounds(event, 200, 650, 200, 100)) {

@@ -1,26 +1,19 @@
 package com.example.animalrun.framework.game;
 
-import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
 public class Car extends Sprite {
 
-	private World world;
 	private int vy;
 	private int vx;
 
-	private static final float TICK_INITIAL = 0.5f;
-	private static float tick = TICK_INITIAL; // 更新速度
-	private float tickTime;
-
-	public Car(double _x, double _y, int speed, Pixmap pixmap) {
-		super(_x, _y, pixmap);
-		x = _x;
-		y = _y;
-		this.world = world;
+	public Car(double _x, int speed, Pixmap pixmap) {
+		super(pixmap);
 		speedY = speed;
 		width = 100;
 		height = 150;
+		this.x = _x;
+		this.y = -height;
 	}
 
 	public void Update() {

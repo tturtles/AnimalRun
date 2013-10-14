@@ -26,6 +26,7 @@ public class PlayScreen extends Screen {
 	private int select = 0;
 	private World world;
 	private Animal animal;
+	private Utils utils;
 	private int score = 0;
 
 	public PlayScreen(Game game, int _select) {
@@ -46,7 +47,8 @@ public class PlayScreen extends Screen {
 			animal = new Animal(190, 630, Assets.animal);
 			break;
 		}
-		world = new World(speed, _select);
+		world = new World(_select);
+		utils = new Utils();
 	}
 
 	@Override
@@ -81,13 +83,13 @@ public class PlayScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			switch (event.type) {
 			case MotionEvent.ACTION_DOWN:
-				if (isBounds(event, 0, 0, 160, 800)) {
+				if (utils.isBounds(event, 0, 0, 160, 800)) {
 					animal.setRequest(1);
 				}
-				if (isBounds(event, 161, 0, 160, 800)) {
+				if (utils.isBounds(event, 161, 0, 160, 800)) {
 					animal.setRequest(2);
 				}
-				if (isBounds(event, 321, 0, 160, 800)) {
+				if (utils.isBounds(event, 321, 0, 160, 800)) {
 					animal.setRequest(3);
 				}
 			}
@@ -140,24 +142,24 @@ public class PlayScreen extends Screen {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
 			sprite.draw(g);
-			if (animal.isCollision(sprite)) { // 衝突した場合
-				if (sprite instanceof Esa) { // それがエサの場合
-					Esa esa = (Esa) sprite;
-					if (esa.getFlag()) {
-						esa.Use(animal); // エサの効果発動！
-						sprites.remove(esa);
-					} else if (!animal.getflag())
-						state = GameState.GameOver; // エサが偽物且つ動物が無敵状態じゃないときゲームオーバー
-					else
-						esa.crash();
-					break;
-				} else if (!animal.getflag())
-					state = GameState.GameOver; // エサ以外に衝突且つ動物が無敵状態じゃない場合ゲームオーバー
-				Sprite _sprite = (Sprite) sprite;
-				_sprite.crash();
-				_sprite.setFlag(true);
-				break;
-			}
+//			if (animal.isCollision(sprite)) { // 衝突した場合
+//				if (sprite instanceof Esa) { // それがエサの場合
+//					Esa esa = (Esa) sprite;
+//					if (esa.getFlag()) {
+//						esa.Use(animal); // エサの効果発動！
+//						sprites.remove(esa);
+//					} else if (!animal.getflag())
+//						state = GameState.GameOver; // エサが偽物且つ動物が無敵状態じゃないときゲームオーバー
+//					else
+//						esa.crash();
+//					break;
+//				} else if (!animal.getflag())
+//					state = GameState.GameOver; // エサ以外に衝突且つ動物が無敵状態じゃない場合ゲームオーバー
+//				Sprite _sprite = (Sprite) sprite;
+//				_sprite.crash();
+//				_sprite.setFlag(true);
+//				break;
+//			}
 			
 			if (Judg_remove(sprite)) {
 				Sprite _sprite = (Sprite) sprite;
@@ -200,15 +202,6 @@ public class PlayScreen extends Screen {
 		g.drawTextAlp("GameOver", 0, 300, paint);
 	}
 
-	// タップ時の当たり判定 目標がタップされた場合true、違う場合false
-	private boolean isBounds(TouchEvent event, int x, int y, int width,
-			int height) {
-		if (event.x > x && event.x < x + width - 1 && event.y > y
-				&& event.y < y + height - 1)
-			return true;
-		else
-			return false;
-	}
 
 	@Override
 	public void pause() {
