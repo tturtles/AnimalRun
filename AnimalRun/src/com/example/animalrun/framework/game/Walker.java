@@ -16,10 +16,10 @@ public class Walker extends Sprite {
 		Random rand = new Random();
 		run = rand.nextInt(2);
 		switch(run){
-	       case 1:x=0;
+	       case 0:x=0;
 	              y=-30;
 	              break;
-	       case 2:x=400;
+	       case 1:x=400;
 	              y=-30;
 	              break;
 	       }

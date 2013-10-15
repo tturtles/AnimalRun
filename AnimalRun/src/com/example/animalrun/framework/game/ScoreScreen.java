@@ -13,10 +13,12 @@ public class ScoreScreen extends Screen {
 
 	private int score = 0;
 	private int select = 0;
+	private Utils utils;
 	public ScoreScreen(Game game, World world) {
 		super(game);
 		this.score = world.getScore();
 		this.select = world.getSelect();
+		utils = new Utils();
 	}
 
 	@Override
@@ -29,25 +31,15 @@ public class ScoreScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (isBounds(event, 20, 650, 140, 100)) {
+				if (utils.isBounds(event, 20, 650, 140, 100)) {
 					game.chengeEditText(false);
 					game.setScreen(new PlayScreen(game, select));
 				}
-				if (isBounds(event, 200, 650, 200, 100)) {
+				if (utils.isBounds(event, 200, 650, 200, 100)) {
 					game.setScreen(new StartScreen(game));
 				}
 			}
 		}
-	}
-
-
-	private boolean isBounds(TouchEvent event, int x, int y, int width,
-			int height) {
-		if (event.x > x && event.x < x + width - 1 && event.y > y
-				&& event.y < y + height - 1)
-			return true;
-		else
-			return false;
 	}
 
 	@Override
