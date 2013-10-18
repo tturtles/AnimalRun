@@ -1,11 +1,5 @@
 package com.example.animalrun.framework.game;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Random;
-
-import com.example.animalrun.framework.Pixmap;
 import com.example.animalrun.framework.Input.TouchEvent;
 
 public class Utils {

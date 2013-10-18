@@ -23,31 +23,27 @@ public class PlayScreen extends Screen {
 	}
 
 	GameState state = GameState.Ready;
-	private int select = 0;
 	private World world;
 	private Animal animal;
 	private Utils utils;
+	private int select = 0;
 	private int score = 0;
 
-	public PlayScreen(Game game, int _select) {
+	public PlayScreen(Game game, int select) {
 		super(game);
-		select = _select;
-		int speed = 0;
+		this.select = select;
 		switch (select) {
-		case 1: // カピパラ選択時
-			speed = 4;
+		case 1: // タヌキ選択時
 			animal = new Animal(190, 630, Assets.animal);
 			break;
-		case 2: // ライオン選択時
-			speed = 7;
+		case 2: // クマ選択時
 			animal = new Animal(190, 630, Assets.animal);
 			break;
-		case 3: // ダチョウ選択時
-			speed = 10;
+		case 3: // ライオン選択時
 			animal = new Animal(190, 630, Assets.animal);
 			break;
 		}
-		world = new World(_select);
+		world = new World(this.select);
 		utils = new Utils();
 	}
 
@@ -142,28 +138,27 @@ public class PlayScreen extends Screen {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
 			sprite.draw(g);
-//			if (animal.isCollision(sprite)) { // 衝突した場合
-//				if (sprite instanceof Esa) { // それがエサの場合
-//					Esa esa = (Esa) sprite;
-//					if (esa.getFlag()) {
-//						esa.Use(animal); // エサの効果発動！
-//						sprites.remove(esa);
-//					} else if (!animal.getflag())
-//						state = GameState.GameOver; // エサが偽物且つ動物が無敵状態じゃないときゲームオーバー
-//					else
-//						esa.crash();
-//					break;
-//				} else if (!animal.getflag())
-//					state = GameState.GameOver; // エサ以外に衝突且つ動物が無敵状態じゃない場合ゲームオーバー
-//				Sprite _sprite = (Sprite) sprite;
-//				_sprite.crash();
-//				_sprite.setFlag(true);
-//				break;
-//			}
-			
-			if (Judg_remove(sprite)) {
-				Sprite _sprite = (Sprite) sprite;
-				sprites.remove(_sprite);
+			if (animal.isCollision(sprite)) { // 衝突した場合
+
+				if (sprite instanceof Esa) { // エサの場合
+					Esa esa = (Esa) sprite;
+					if (esa.getFlag()) { // 餌が本物の場合
+						esa.Use(animal);
+						sprites.remove(esa);
+					}
+				}
+
+				if (!animal.getflag()) // 通常状態で障害物に衝突
+					state = GameState.GameOver;
+
+				if (animal.getflag()) // 無敵状態の時
+					sprite.crush(true);
+
+				break;
+			}
+
+			if (Judg_remove(sprite)) { // 画面外に障害物が出た場合リストから削除
+				sprites.remove(sprite);
 				break;
 			}
 		}
@@ -181,6 +176,8 @@ public class PlayScreen extends Screen {
 			}
 		}
 		g.drawTextAlp("SCORE : " + world.getScore(), 200 - i * 15, 50, paint);
+		// 試験用(リストサイズを描画)
+		// g.drawTextAlp("LIST : " + sprites.size(), 200 - i * 15, 50, paint);
 	}
 
 	private boolean Judg_remove(Sprite sprite) {
@@ -201,7 +198,6 @@ public class PlayScreen extends Screen {
 		paint.setTextSize(100);
 		g.drawTextAlp("GameOver", 0, 300, paint);
 	}
-
 
 	@Override
 	public void pause() {

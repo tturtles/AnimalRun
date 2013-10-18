@@ -76,7 +76,6 @@ public abstract class AndroidGame extends Activity implements Game {
 				/ (float) frameBufferWidth;
 		float _scaleY = getWindowManager().getDefaultDisplay().getHeight()
 				/ (float) frameBufferHeight;
-		Log.d("SCALE", "scaleX" + _scaleX + "scaleY" + _scaleY);
 		float density = getResources().getDisplayMetrics().density;
 		/* End */
 
@@ -93,6 +92,7 @@ public abstract class AndroidGame extends Activity implements Game {
 		et.setTextColor(ET_TEXTCOLOR);
 		et.setTextSize(ET_TEXTSIZE);
 		et.setInputType(InputType.TYPE_CLASS_TEXT);
+		et.setBackgroundColor(Color.BLACK);
 		setContentView(mainLayout);
 		/* End */
 

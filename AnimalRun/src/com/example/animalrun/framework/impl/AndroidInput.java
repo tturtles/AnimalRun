@@ -11,17 +11,17 @@ import android.view.View;
 
 
 public class AndroidInput implements Input {
-	AccelerometerHandoler accelHandler;		//・ｽ・ｽ・ｽ・ｽ・ｽx・ｽZ・ｽ・ｽ・ｽT・ｽ[
-	KeyboardHandler keyHandler;				//・ｽL・ｽ[・ｽ{・ｽ[・ｽh
-	TouchHandler touchHandler;				//・ｽ^・ｽb・ｽ`
+	AccelerometerHandoler accelHandler;		
+	KeyboardHandler keyHandler;				
+	TouchHandler touchHandler;				
 	
 	public AndroidInput(Context context, View view, float scaleX, float scaleY) {
 		accelHandler = new AccelerometerHandoler(context);
 		keyHandler = new KeyboardHandler(view);
-		if(VERSION.SDK_INT < 5)
+//		if(VERSION.SDK_INT < 5)
 			touchHandler = new SingleTouchHandler(view, scaleX, scaleY);
-		else
-			touchHandler = new MultiTouchHandler(view, scaleX, scaleY);
+//		else
+//			touchHandler = new MultiTouchHandler(view, scaleX, scaleY);
 	}
 	
 	

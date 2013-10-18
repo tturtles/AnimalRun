@@ -3,8 +3,6 @@ package com.example.animalrun.framework.game;
 import java.util.List;
 
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.widget.Toast;
 
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
@@ -21,7 +19,6 @@ public class StartScreen extends Screen {
 
 	@Override
 	public void update(float deltaTime) {
-		Graphics g = game.getGraphics();
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 

@@ -17,14 +17,14 @@ public class World {
 	private final int LEFT = 40;
 	private final int CENTER = 195;
 	private final int RIGHT = 345;
-	private final int PERC_CAR = 70; // クルマ&トラックの出現率
-	private final int PERC_WALKER = 20; // 歩行者の出現率
-	private final int PERC_ESA = 10; // エサの出現率
+	private final int PERC_CAR = 50; // クルマ&トラックの出現率
+	private final int PERC_WALKER = 10; // 歩行者の出現率
+	private final int PERC_ESA = 40; // エサの出現率
 	private int speed;
 	private int score = 0;
 	private int select = 0;
 	private int count_list = 0;
-	private float tickTime;
+	private float tickTime = 0;
 	private Pixmap[] image_esa; // 0=trueエサ 1=falseエサ
 	private ArrayList list;
 	private ArrayList bucks;
@@ -32,7 +32,6 @@ public class World {
 	private int count_buck = HAIKEI - 1;
 
 	public World(int select) {
-		tickTime = 0;
 		this.select = select;
 		load();
 	}

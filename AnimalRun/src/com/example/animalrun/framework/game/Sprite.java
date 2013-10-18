@@ -14,18 +14,17 @@ public abstract class Sprite {
 	protected int speedX;
 	protected int speedY;
 
-	protected boolean flag = false;
+	protected boolean flag_crush = false;
 	protected int angle = 0;
-
 
 	public Sprite(Pixmap pixmap) {
 		this.image = pixmap;
 	}
-	
+
 	public abstract void Update();
 
 	public void draw(Graphics g) {
-		if (flag) {
+		if (flag_crush) {
 			g.drawPixmap(image, (int) x, (int) y, angle);
 			angle += 20;
 		} else {
@@ -33,7 +32,7 @@ public abstract class Sprite {
 			angle = 0;
 		}
 	}
-	
+
 	/*
 	 * 他のスプライトとの当たり判定
 	 */
@@ -43,14 +42,16 @@ public abstract class Sprite {
 		Rect spriteRect = new Rect((int) sprite.getX(), (int) sprite.getY(),
 				(int) sprite.getWidth() + (int) sprite.getX(),
 				(int) sprite.getHeight() + (int) sprite.getY());
-		if (playerRect.intersect(spriteRect)) {
+		//Rect同士ぶつかり合っていたらtrue
+		if (playerRect.intersect(spriteRect)) { 
 			return true;
-		} // //Rect同士ぶつかり合っていたらtrue
+		}
 		return false;
 	}
-	
-	public void setFlag(boolean flag) {
-		this.flag = flag;
+
+	public void crush(boolean flag) {
+		this.flag_crush = flag;
+		this.speedY = -30;
 	}
 
 	public double getX() {
@@ -67,10 +68,6 @@ public abstract class Sprite {
 
 	public int getHeight() {
 		return height;
-	}
-
-	public void crash() {
-		this.speedY = -30;
 	}
 
 }
