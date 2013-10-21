@@ -11,19 +11,17 @@ import com.example.animalrun.framework.Input.TouchEvent;
 
 public class ScoreScreen extends Screen {
 
-	private int score = 0;
-	private int select = 0;
 	private Utils utils;
+	private World world;
+	
 	public ScoreScreen(Game game, World world) {
 		super(game);
-		this.score = world.getScore();
-		this.select = world.getSelect();
+		this.world = world;
 		utils = new Utils();
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		Graphics g = game.getGraphics();
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 
@@ -33,7 +31,7 @@ public class ScoreScreen extends Screen {
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (utils.isBounds(event, 20, 650, 140, 100)) {
 					game.chengeEditText(false);
-					game.setScreen(new PlayScreen(game, select));
+					game.setScreen(new PlayScreen(game, world.getSelect()));
 				}
 				if (utils.isBounds(event, 200, 650, 200, 100)) {
 					game.setScreen(new StartScreen(game));
@@ -47,7 +45,7 @@ public class ScoreScreen extends Screen {
 		Graphics g = game.getGraphics();
 		g.drawRect(0, 0, 481, 801, Color.WHITE);
 		g.drawTextAlp("スコア", 30, 100, Color.RED, 50);
-		g.drawTextAlp(""+this.score, 200, 200, Color.BLACK, 100);
+		g.drawTextAlp(""+world.getScore(), 200, 200, Color.BLACK, 100);
 		g.drawPixmap(Assets.bt_retry, 20, 650);
 		g.drawPixmap(Assets.bt_title, 200, 650);
 		g.drawTextAlp("name", 30, 250, Color.RED, 50);

@@ -6,19 +6,18 @@ import android.graphics.Color;
 
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
-import com.example.animalrun.framework.Input.TouchEvent;
 import com.example.animalrun.framework.Screen;
+import com.example.animalrun.framework.Input.TouchEvent;
 
-public class StartScreen extends Screen {
-	private Utils utils;
+public class RunkingScreen extends Screen {
 
-	public StartScreen(Game game) {
+	public RunkingScreen(Game game) {
 		super(game);
-		utils = new Utils();
 	}
 
 	@Override
 	public void update(float deltaTime) {
+		Graphics g = game.getGraphics();
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 
@@ -26,39 +25,40 @@ public class StartScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (utils.isBounds(event, 80, 400, 250, 100)) {
-					game.setScreen(new CharaSelectScreen(game));
-				} else if(utils.isBounds(event, 80, 500, 320, 100)) {
-					game.setScreen(new RunkingScreen(game));
-					
-				} else if(utils.isBounds(event, 80, 600, 260, 100)) {
-					System.exit(0);
-				}
 			}
 		}
+	}
+
+
+	private boolean isBounds(TouchEvent event, int x, int y, int width,
+			int height) {
+		if (event.x > x && event.x < x + width - 1 && event.y > y
+				&& event.y < y + height - 1)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawRect(0, 0, 480, 800, Color.BLACK);
-		g.drawPixmap(Assets.buck_StartScreen, 0, 0);
-		g.drawPixmap(Assets.bt_start, 80, 400);
-		g.drawPixmap(Assets.bt_score, 80, 500);
-		g.drawPixmap(Assets.bt_close, 80, 600);
-		game.chengeEditText(false);
+		g.drawRect(0, 0, 481, 801, Color.BLACK);
+		g.drawPixmap(Assets.bt_back, 320, 680);
 	}
 
 	@Override
 	public void pause() {
+
 	}
 
 	@Override
 	public void resume() {
+
 	}
 
 	@Override
 	public void dispose() {
+
 	}
 
 }

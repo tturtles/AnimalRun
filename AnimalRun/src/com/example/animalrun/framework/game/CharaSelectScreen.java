@@ -16,13 +16,12 @@ public class CharaSelectScreen extends Screen {
 		super(game);
 	}
 
-	private int select = 0;
 
 	@Override
 	public void update(float deltaTime) {
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
-
+		int select = 0;
 		int len = touchEvents.size();
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);

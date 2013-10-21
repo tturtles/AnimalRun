@@ -26,12 +26,9 @@ public class PlayScreen extends Screen {
 	private World world;
 	private Animal animal;
 	private Utils utils;
-	private int select = 0;
-	private int score = 0;
 
 	public PlayScreen(Game game, int select) {
 		super(game);
-		this.select = select;
 		switch (select) {
 		case 1: // タヌキ選択時
 			animal = new Animal(190, 630, Assets.animal);
@@ -43,7 +40,7 @@ public class PlayScreen extends Screen {
 			animal = new Animal(190, 630, Assets.animal);
 			break;
 		}
-		world = new World(this.select);
+		world = new World(select);
 		utils = new Utils();
 	}
 
@@ -165,7 +162,7 @@ public class PlayScreen extends Screen {
 		Paint paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setTextSize(50);
-		score = world.getScore();
+		int score = world.getScore();
 		int i;
 		for (i = 0; score > 9; i++) {
 			if (score / 10 < 10)

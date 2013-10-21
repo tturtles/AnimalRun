@@ -18,8 +18,8 @@ public class World {
 	private final int CENTER = 195;
 	private final int RIGHT = 345;
 	private final int PERC_CAR = 50; // クルマ&トラックの出現率
-	private final int PERC_WALKER = 10; // 歩行者の出現率
-	private final int PERC_ESA = 40; // エサの出現率
+	private final int PERC_WALKER = 30; // 歩行者の出現率
+	private final int PERC_ESA = 20; // エサの出現率
 	private int speed;
 	private int score = 0;
 	private int select = 0;
@@ -91,11 +91,6 @@ public class World {
 				i = HAIKEI - 1;
 			g.drawPixmap((Pixmap) bucks.get(i), 0, l * 80);
 		}
-		// if (flag) {
-		// Paint paint = new Paint(); //更新速度の確認用（試験用）
-		// paint.setColor(Color.WHITE);
-		// g.drawCircle(100, 100, 10, paint);
-		// }
 	}
 
 	// リストの初期化
