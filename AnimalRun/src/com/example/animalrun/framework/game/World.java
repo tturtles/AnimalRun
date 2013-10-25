@@ -17,9 +17,9 @@ public class World {
 	private final int LEFT = 40;
 	private final int CENTER = 195;
 	private final int RIGHT = 345;
-	private final int PERC_CAR = 50; // クルマ&トラックの出現率
-	private final int PERC_WALKER = 30; // 歩行者の出現率
-	private final int PERC_ESA = 20; // エサの出現率
+	private int PERC_CAR = 50; // クルマ&トラックの出現率
+	private int PERC_WALKER = 30; // 歩行者の出現率
+	private int PERC_ESA = 20; // エサの出現率
 	private int speed;
 	private int score = 0;
 	private int select = 0;
@@ -48,17 +48,25 @@ public class World {
 		image_esa = new Pixmap[2];
 		switch (select) {
 		case 1:
-			this.speed = 4;
-		case 3:
+			this.speed = 3;
+		case 3://ダチョウ
 			image_esa[0] = Assets.esa1_true;
 			image_esa[1] = Assets.esa1_false;
 			if (select == 3)
-				this.speed = 10;
+
+				this.speed = 11;
+			this.PERC_CAR=70;
+			this.PERC_WALKER=30;
+			this.PERC_ESA=0;
+
 			break;
-		case 2:
+		case 2://ライオン
 			image_esa[0] = Assets.esa2_true;
 			image_esa[1] = Assets.esa2_false;
 			this.speed = 7;
+			this.PERC_CAR=60;
+			this.PERC_WALKER=30;
+			this.PERC_ESA=10;
 			break;
 		}
 
