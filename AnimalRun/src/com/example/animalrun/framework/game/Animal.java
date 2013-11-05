@@ -1,6 +1,7 @@
 package com.example.animalrun.framework.game;
 
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
@@ -11,12 +12,23 @@ public class Animal extends Sprite {
 		Left, Center, Right, None
 	}
 
-	private static final float TICK_INITIAL = 5.0f;
-	private static float tick = 0; // 更新速度
+	// 無敵モード時間
+	private static final float TICK_INITIAL = 10.0f;
+	private static float tick = TICK_INITIAL;
+
+	// 無敵モード終了合図開始時間
+	private static final float TICK_INITIAL2 = 3.0f;
+	private static float tick2 = TICK_INITIAL - TICK_INITIAL2;
+
+	// 無敵モード終了合図画像切り替え時間（x秒毎）
+	private static final float TICK_INITIAL3 = 0.1f;
+	private static float tick3 = TICK_INITIAL3;
 
 	private double vx;
 	private double speed; // 移動速度
 
+	private float tick_w=0;	// 無敵モード終了時画像切り替えでdeltaTimeを溜める変数
+	private boolean state_switch = false;	// 無敵モード終了時画像切り替えに使用するboolean(ボタン)
 	private float tickTime = 0;
 
 	Point point = Point.Center;
@@ -33,6 +45,7 @@ public class Animal extends Sprite {
 		speed = 10;
 		vx = 0;
 	}
+
 	public float gettick() {
 		return tick;
 	}
@@ -42,9 +55,23 @@ public class Animal extends Sprite {
 	}
 
 	public void Update(float deltaTime) {
+
+		// 無敵状態時の処理
 		if (flag) {
 			tickTime += deltaTime;
-			while (tickTime > tick) {
+
+			if (tickTime > tick2) {
+				if (tick_w > tick3) {
+					if (state_switch)
+						image = Assets.animal;
+					else
+						image = Assets.animal_sp;
+					tick_w = 0;
+				}
+				state_switch = !state_switch;
+				tick_w+=deltaTime;
+			}
+			while (tickTime > tick) { // 無敵状態終了処理
 				tickTime -= tick;
 				flag = false;
 			}
@@ -52,6 +79,7 @@ public class Animal extends Sprite {
 			image = Assets.animal;
 			tick = 0;
 		}
+
 		switch (request) {
 		case Left: // 左レーンをタップされた場合
 			if (x <= 40) {
