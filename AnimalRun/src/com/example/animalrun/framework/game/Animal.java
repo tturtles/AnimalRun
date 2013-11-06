@@ -13,16 +13,16 @@ public class Animal extends Sprite {
 	}
 
 	// 無敵モード時間
-	private static final float TICK_INITIAL = 10.0f;
+	private static final float TICK_INITIAL = 5.0f;
 	private static float tick = TICK_INITIAL;
 
 	// 無敵モード終了合図開始時間
-	private static final float TICK_INITIAL2 = 3.0f;
-	private static float tick2 = TICK_INITIAL - TICK_INITIAL2;
+	private static final float TICK_INITIAL2 = 2.0f;
+	private static float tick_lasttime = TICK_INITIAL - TICK_INITIAL2;
 
 	// 無敵モード終了合図画像切り替え時間（x秒毎）
 	private static final float TICK_INITIAL3 = 0.1f;
-	private static float tick3 = TICK_INITIAL3;
+	private static float image_changeTime = TICK_INITIAL3;
 
 	private double vx;
 	private double speed; // 移動速度
@@ -60,8 +60,8 @@ public class Animal extends Sprite {
 		if (flag) {
 			tickTime += deltaTime;
 
-			if (tickTime > tick2) {
-				if (tick_w > tick3) {
+			if (tickTime > tick_lasttime) {
+				if (tick_w > image_changeTime) {
 					if (state_switch)
 						image = Assets.animal;
 					else
