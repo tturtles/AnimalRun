@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.graphics.Color;
 
+import com.example.animalrun.framework.game.Assets;
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Screen;
@@ -13,7 +14,8 @@ public class ScoreScreen extends Screen {
 
 	private Utils utils;
 	private World world;
-	
+	private boolean flag = false;
+
 	public ScoreScreen(Game game, World world) {
 		super(game);
 		this.world = world;
@@ -30,12 +32,21 @@ public class ScoreScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (utils.isBounds(event, 20, 650, 140, 100)) {
-					game.chengeEditText(false);
 					game.setScreen(new PlayScreen(game, world.getSelect()));
+					game.chengeEditText(false);
+					return;
+				}
+				if (utils.isBounds(event, 140, 400, 200, 100)) {
+					Utils.addScore(world.getScore());
+					Utils.save(game.getFileIO());
+					flag = true;
+					return;
 				}
 				if (utils.isBounds(event, 200, 650, 200, 100)) {
 					game.setScreen(new StartScreen(game));
+					return;
 				}
+				flag = false;
 			}
 		}
 	}
@@ -45,10 +56,13 @@ public class ScoreScreen extends Screen {
 		Graphics g = game.getGraphics();
 		g.drawRect(0, 0, 481, 801, Color.WHITE);
 		g.drawTextAlp("スコア", 30, 100, Color.RED, 50);
-		g.drawTextAlp(""+world.getScore(), 200, 200, Color.BLACK, 100);
+		g.drawTextAlp("" + world.getScore(), 200, 200, Color.BLACK, 100);
 		g.drawPixmap(Assets.bt_retry, 20, 650);
 		g.drawPixmap(Assets.bt_title, 200, 650);
 		g.drawTextAlp("name", 30, 250, Color.RED, 50);
+		g.drawPixmap(Assets.bt_touroku, 140, 400);
+		if (flag)
+			g.drawTextAlp("登録完了", 110, 470, Color.RED, 70);
 		game.chengeEditText(true);
 	}
 

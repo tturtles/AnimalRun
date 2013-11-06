@@ -9,10 +9,16 @@ import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Screen;
 import com.example.animalrun.framework.Input.TouchEvent;
 
-public class RunkingScreen extends Screen {
+public class HighScoreRunkingScreen extends Screen {
 
-	public RunkingScreen(Game game) {
+	String lines[] = new String[5];
+
+	public HighScoreRunkingScreen(Game game) {
 		super(game);
+
+		for (int i = 0; i < 5; i++) {
+			lines[i] = "" + (i + 1) + ". " + Utils.highscores[i];
+		}
 	}
 
 	@Override
@@ -25,10 +31,13 @@ public class RunkingScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
+				if (isBounds(event, 270, 680, 200, 100)) {
+					game.setScreen(new StartScreen(game));
+					return;
+				}
 			}
 		}
 	}
-
 
 	private boolean isBounds(TouchEvent event, int x, int y, int width,
 			int height) {
@@ -42,8 +51,12 @@ public class RunkingScreen extends Screen {
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawRect(0, 0, 481, 801, Color.BLACK);
-		g.drawPixmap(Assets.bt_back, 320, 680);
+		g.drawRect(0, 0, 481, 801, Color.WHITE);
+		g.drawPixmap(Assets.bt_title, 270, 680);
+
+		for (int i = 0; i < 5; i++) {
+			g.drawTextAlp(lines[i], 20, (i + 1) * 50, Color.RED, 20);
+		}
 	}
 
 	@Override

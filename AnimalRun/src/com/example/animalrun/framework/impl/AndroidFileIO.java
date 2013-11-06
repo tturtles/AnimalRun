@@ -10,27 +10,30 @@ import java.io.OutputStream;
 import android.content.res.AssetManager;
 import android.os.Environment;
 
+import com.example.animalrun.framework.FileIO;
 
-public class AndroidFileIO implements com.example.animalrun.framework.FileIO {
+public class AndroidFileIO implements FileIO {
 	AssetManager assets;
 	String externalStoragePath;
 
 	public AndroidFileIO(AssetManager assets) {
 		this.assets = assets;
 		this.externalStoragePath = Environment.getExternalStorageDirectory()
-												.getAbsolutePath() + File.separator;
+			.getAbsolutePath() + File.separator;
 	}
+	
 	
 	public InputStream readAsset(String fileName) throws IOException {
 		return assets.open(fileName);
 	}
-
+	
+	
 	public InputStream readFile(String fileName) throws IOException {
 		return new FileInputStream(externalStoragePath + fileName);
 	}
 
+	
 	public OutputStream writeFile(String fileName) throws IOException {
 		return new FileOutputStream(externalStoragePath + fileName);
 	}
-	
 }

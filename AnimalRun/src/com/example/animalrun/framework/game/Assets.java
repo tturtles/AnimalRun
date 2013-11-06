@@ -12,6 +12,7 @@ public class Assets {
 	public static Pixmap bt_datyou;
 	public static Pixmap bt_title;
 	public static Pixmap bt_retry;
+	public static Pixmap bt_touroku;
 	
 	public static Pixmap animal;
 	public static Pixmap animal_sp;

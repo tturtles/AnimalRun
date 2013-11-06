@@ -198,6 +198,10 @@ public class PlayScreen extends Screen {
 
 	@Override
 	public void pause() {
+		if (state == GameState.GameOver) {
+			Utils.addScore(world.getScore());
+			Utils.save(game.getFileIO());
+		}
 	}
 
 	@Override

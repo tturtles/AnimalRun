@@ -1,5 +1,6 @@
 package com.example.animalrun.framework.game;
 
+import com.example.animalrun.framework.game.Assets;
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Screen;
@@ -36,6 +37,8 @@ public class LoadingScreen extends Screen {
 		Assets.bt_title = g.newPixmap("bt_title.png", PixmapFormat.ARGB4444);
 		Assets.buck_StartScreen = g.newPixmap("StartScreenImage.png", PixmapFormat.ARGB4444);
 		Assets.walker=g.newPixmap("walker.png", PixmapFormat.ARGB4444);
+		Assets.bt_touroku = g.newPixmap("bt_touroku.png", PixmapFormat.ARGB4444);
+		Utils.load(game.getFileIO());
 		game.setScreen(new StartScreen(game));
 	}
 

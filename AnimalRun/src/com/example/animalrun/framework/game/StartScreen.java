@@ -29,7 +29,7 @@ public class StartScreen extends Screen {
 				if (utils.isBounds(event, 80, 400, 250, 100)) {
 					game.setScreen(new CharaSelectScreen(game));
 				} else if(utils.isBounds(event, 80, 500, 320, 100)) {
-					game.setScreen(new RunkingScreen(game));
+					game.setScreen(new HighScoreRunkingScreen(game));
 					
 				} else if(utils.isBounds(event, 80, 600, 260, 100)) {
 					System.exit(0);

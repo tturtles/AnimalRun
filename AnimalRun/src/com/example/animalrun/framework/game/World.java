@@ -30,7 +30,8 @@ public class World {
 	private ArrayList bucks;
 	private LinkedList sprites;
 	private int count_buck = HAIKEI - 1;
-
+	public boolean gameOver = false;;
+	
 	public World(int select) {
 		this.select = select;
 		load();
