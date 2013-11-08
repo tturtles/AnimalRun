@@ -1,77 +1,33 @@
 package com.example.animalrun.framework.game;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
+import android.content.ContentValues;
 import com.example.animalrun.framework.FileIO;
-import com.example.animalrun.framework.Input.TouchEvent;
 
 public class Utils {
 	public static boolean soundEnabled = true;
-	public static int[] highscores = new int[] { 100, 80, 50, 30, 10 };
 
 	public static void load(FileIO files) {
-		BufferedReader in = null;
-		try {
-			in = new BufferedReader(new InputStreamReader(
-					files.readFile(".animalrun_savedata")));
-			soundEnabled = Boolean.parseBoolean(in.readLine());
-			for (int i = 0; i < 5; i++) {
-				highscores[i] = Integer.parseInt(in.readLine());
-			}
-		} catch (IOException e) {
-			// デフォルト設定があるのでエラーは無視
-		} catch (NumberFormatException e) {
-			// 同上
-		} finally {
-			try {
-				if (in != null)
-					in.close();
-			} catch (IOException e) {
-			}
-		}
+		String sql = "create table score_data("+"_id integer primary key autoincrement,"+"name text not null," + "score integer default 0,"+"mode text not null)";
+		files.CreateDBandTable(sql);
 	}
 
-	public static void save(FileIO files) {
-		BufferedWriter out = null;
-		try {
-			out = new BufferedWriter(new OutputStreamWriter(
-					files.writeFile(".animalrun_savedata")));
-			out.write(Boolean.toString(soundEnabled));
-			for (int i = 0; i < 5; i++) {
-				out.write(Integer.toString(highscores[i]));
-			}
-		} catch (IOException e) {
-		} finally {
-			try {
-				if (out != null)
-					out.close();
-			} catch (IOException e) {
-			}
-		}
+	public static boolean addscore(FileIO files, String name, int score, String mode) {
+		if(name.toString().equals("")) return false;
+		ContentValues val = new ContentValues();
+		val.put("name", name);
+		val.put("score", score);
+		val.put("mode", mode);
+		return files.writeFile(val);
 	}
-
-	public static void addScore(int score) {
-		for (int i = 0; i < 5; i++) {
-			if (highscores[i] < score) {
-				for (int j = 4; j > i; j--)
-					highscores[j] = highscores[j - 1];
-				highscores[i] = score;
-				break;
-			}
-		}
+	
+	public static String[][] readFile(FileIO files) {
+		String[] columns = {"name", "score","mode"};
+		String order = "score desc";
+		String where = "mode like ?";
+		String value[] = new String[1];
+		value[0] = "easy";
+		return files.readFile(columns, where, value, order, 5);
 	}
-
-	public boolean isBounds(TouchEvent event, int x, int y, int width,
-			int height) {
-		if (event.x > x && event.x < x + width - 1 && event.y > y
-				&& event.y < y + height - 1)
-			return true;
-		else
-			return false;
-	}
-
+	
 }

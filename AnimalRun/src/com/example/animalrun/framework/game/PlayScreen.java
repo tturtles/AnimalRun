@@ -25,7 +25,6 @@ public class PlayScreen extends Screen {
 	GameState state = GameState.Ready;
 	private World world;
 	private Animal animal;
-	private Utils utils;
 
 	public PlayScreen(Game game, int select) {
 		super(game);
@@ -41,7 +40,6 @@ public class PlayScreen extends Screen {
 			break;
 		}
 		world = new World(select);
-		utils = new Utils();
 	}
 
 	@Override
@@ -76,13 +74,13 @@ public class PlayScreen extends Screen {
 			TouchEvent event = touchEvents.get(i);
 			switch (event.type) {
 			case MotionEvent.ACTION_DOWN:
-				if (utils.isBounds(event, 0, 0, 160, 800)) {
+				if (isBounds(event, 0, 0, 160, 800)) {
 					animal.setRequest(1);
 				}
-				if (utils.isBounds(event, 161, 0, 160, 800)) {
+				if (isBounds(event, 161, 0, 160, 800)) {
 					animal.setRequest(2);
 				}
-				if (utils.isBounds(event, 321, 0, 160, 800)) {
+				if (isBounds(event, 321, 0, 160, 800)) {
 					animal.setRequest(3);
 				}
 			}
@@ -185,6 +183,14 @@ public class PlayScreen extends Screen {
 		else
 			return false;
 	}
+	public boolean isBounds(TouchEvent event, int x, int y, int width,
+			int height) {
+		if (event.x > x && event.x < x + width - 1 && event.y > y
+				&& event.y < y + height - 1)
+			return true;
+		else
+			return false;
+	}
 
 	private void drawGameOverUI() {
 		// ゲームオーバー時のUI(描画系)
@@ -199,8 +205,8 @@ public class PlayScreen extends Screen {
 	@Override
 	public void pause() {
 		if (state == GameState.GameOver) {
-			Utils.addScore(world.getScore());
-			Utils.save(game.getFileIO());
+//			addScore(world.getScore());
+//			save(game.getFileIO());
 		}
 	}
 

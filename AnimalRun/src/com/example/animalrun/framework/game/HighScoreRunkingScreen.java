@@ -4,26 +4,22 @@ import java.util.List;
 
 import android.graphics.Color;
 
+import com.example.animalrun.framework.game.Utils;
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Screen;
 import com.example.animalrun.framework.Input.TouchEvent;
 
 public class HighScoreRunkingScreen extends Screen {
-
-	String lines[] = new String[5];
+	private String[][] list;
 
 	public HighScoreRunkingScreen(Game game) {
 		super(game);
-
-		for (int i = 0; i < 5; i++) {
-			lines[i] = "" + (i + 1) + ". " + Utils.highscores[i];
-		}
+		list = Utils.readFile(game.getFileIO());
 	}
 
 	@Override
 	public void update(float deltaTime) {
-		Graphics g = game.getGraphics();
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 
@@ -53,9 +49,15 @@ public class HighScoreRunkingScreen extends Screen {
 		Graphics g = game.getGraphics();
 		g.drawRect(0, 0, 481, 801, Color.WHITE);
 		g.drawPixmap(Assets.bt_title, 270, 680);
-
-		for (int i = 0; i < 5; i++) {
-			g.drawTextAlp(lines[i], 20, (i + 1) * 50, Color.RED, 20);
+		if (list == null) {
+			g.drawTextAlp("登録スコアがありません", 10, 100, Color.RED, 40);
+		} else {
+			for (int i = 0; i < list.length; i++) {
+				for (int j = 0; j < list[0].length && list[i][j] != null; j++) {
+					g.drawTextAlp(list[i][j], 20 + j * 150, (i + 1) * 100,
+							Color.RED, 40);
+				}
+			}
 		}
 	}
 

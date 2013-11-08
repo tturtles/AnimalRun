@@ -10,11 +10,9 @@ import com.example.animalrun.framework.Input.TouchEvent;
 import com.example.animalrun.framework.Screen;
 
 public class StartScreen extends Screen {
-	private Utils utils;
 
 	public StartScreen(Game game) {
 		super(game);
-		utils = new Utils();
 	}
 
 	@Override
@@ -26,12 +24,12 @@ public class StartScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (utils.isBounds(event, 80, 400, 250, 100)) {
+				if (isBounds(event, 80, 400, 250, 100)) {
 					game.setScreen(new CharaSelectScreen(game));
-				} else if(utils.isBounds(event, 80, 500, 320, 100)) {
+				} else if(isBounds(event, 80, 500, 320, 100)) {
 					game.setScreen(new HighScoreRunkingScreen(game));
 					
-				} else if(utils.isBounds(event, 80, 600, 260, 100)) {
+				} else if(isBounds(event, 80, 600, 260, 100)) {
 					System.exit(0);
 				}
 			}
@@ -47,6 +45,15 @@ public class StartScreen extends Screen {
 		g.drawPixmap(Assets.bt_score, 80, 500);
 		g.drawPixmap(Assets.bt_close, 80, 600);
 		game.chengeEditText(false);
+	}
+	
+	public boolean isBounds(TouchEvent event, int x, int y, int width,
+			int height) {
+		if (event.x > x && event.x < x + width - 1 && event.y > y
+				&& event.y < y + height - 1)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
