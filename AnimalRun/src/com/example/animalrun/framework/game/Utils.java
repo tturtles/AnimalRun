@@ -21,12 +21,12 @@ public class Utils {
 		return files.writeFile(val);
 	}
 	
-	public static String[][] readFile(FileIO files) {
-		String[] columns = {"name", "score","mode"};
+	public static String[][] readFile(FileIO files, String mode) {
+		String[] columns = {"name", "score"};
 		String order = "score desc";
 		String where = "mode like ?";
 		String value[] = new String[1];
-		value[0] = "easy";
+		value[0] = mode;
 		return files.readFile(columns, where, value, order, 5);
 	}
 	

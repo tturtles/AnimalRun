@@ -27,13 +27,13 @@ public class ScoreScreen extends Screen {
 		game.getInput().getKeyEvents();
 		String mode = null;
 		switch (world.getSelect()) {
-		case 0:
+		case 1:
 			mode = "easy";
 			break;
-		case 1:
+		case 2:
 			mode = "normal";
 			break;
-		case 2:
+		case 3:
 			mode = "hard";
 			break;
 		}

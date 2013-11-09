@@ -11,11 +11,15 @@ import com.example.animalrun.framework.Screen;
 import com.example.animalrun.framework.Input.TouchEvent;
 
 public class HighScoreRunkingScreen extends Screen {
-	private String[][] list;
+	private String[][] list_easy;
+	private String[][] list_normal;
+	private String[][] list_hard;
 
 	public HighScoreRunkingScreen(Game game) {
 		super(game);
-		list = Utils.readFile(game.getFileIO());
+		list_easy = Utils.readFile(game.getFileIO(), "easy");
+		list_normal = Utils.readFile(game.getFileIO(), "normal");
+		list_hard = Utils.readFile(game.getFileIO(), "hard");
 	}
 
 	@Override
@@ -49,13 +53,39 @@ public class HighScoreRunkingScreen extends Screen {
 		Graphics g = game.getGraphics();
 		g.drawRect(0, 0, 481, 801, Color.WHITE);
 		g.drawPixmap(Assets.bt_title, 270, 680);
-		if (list == null) {
-			g.drawTextAlp("登録スコアがありません", 10, 100, Color.RED, 40);
+		if (list_easy == null) {
+			g.drawTextAlp("easyの登録スコアがありません", 10, 100, Color.RED, 25);
 		} else {
-			for (int i = 0; i < list.length; i++) {
-				for (int j = 0; j < list[0].length && list[i][j] != null; j++) {
-					g.drawTextAlp(list[i][j], 20 + j * 150, (i + 1) * 100,
-							Color.RED, 40);
+			g.drawTextAlp("easyモードランキング", 10, 100, Color.RED, 25);
+			for (int i = 0; i < list_easy.length; i++) {
+				g.drawTextAlp((i+1)+"位", 10, 100+(i + 1) * 30, Color.RED, 25);
+				for (int j = 0; j < list_easy[0].length && list_easy[i][j] != null; j++) {
+					g.drawTextAlp(list_easy[i][j], 60 + j * 150, 100+(i + 1) * 30,
+							Color.RED, 25);
+				}
+			}
+		}
+		if (list_normal == null) {
+			g.drawTextAlp("normalの登録スコアがありません", 10, 300, Color.RED, 25);
+		} else {
+			g.drawTextAlp("easyモードランキング", 10, 300, Color.RED, 25);
+			for (int i = 0; i < list_normal.length; i++) {
+				g.drawTextAlp((i+1)+"位", 10, 300+(i + 1) * 30, Color.RED, 25);
+				for (int j = 0; j < list_normal[0].length && list_normal[i][j] != null; j++) {
+					g.drawTextAlp(list_normal[i][j], 60 + j * 150, 300+(i + 1) * 30,
+							Color.RED, 25);
+				}
+			}
+		}
+		if (list_hard == null) {
+			g.drawTextAlp("hardの登録スコアがありません", 10, 500, Color.RED, 25);
+		} else {
+			g.drawTextAlp("hardモードランキング", 10, 500, Color.RED, 25);
+			for (int i = 0; i < list_hard.length; i++) {
+				g.drawTextAlp((i+1)+"位", 10, 500+(i + 1) * 30, Color.RED, 25);
+				for (int j = 0; j < list_hard[0].length && list_hard[i][j] != null; j++) {
+					g.drawTextAlp(list_hard[i][j], 60 + j * 150, 500+(i + 1) * 30,
+							Color.RED, 25);
 				}
 			}
 		}
