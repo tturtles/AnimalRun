@@ -47,7 +47,7 @@ public class ScoreScreen extends Screen {
 					return;
 				}
 				if (isBounds(event, 140, 400, 200, 100)) {
-					flag = Utils.addscore(game.getFileIO(), game.getEText(),
+					flag = Utils.addScore(game.getFileIO(), game.getEText(),
 							world.getScore(), mode);
 					return;
 				}

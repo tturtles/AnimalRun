@@ -1,8 +1,6 @@
 package com.example.animalrun.framework.game;
 
 import android.graphics.Rect;
-import android.util.Log;
-
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
@@ -27,8 +25,8 @@ public class Animal extends Sprite {
 	private double vx;
 	private double speed; // 移動速度
 
-	private float tick_w=0;	// 無敵モード終了時画像切り替えでdeltaTimeを溜める変数
-	private boolean state_switch = false;	// 無敵モード終了時画像切り替えに使用するboolean(ボタン)
+	private float tick_w = 0; // 無敵モード終了時画像切り替えでdeltaTimeを溜める変数
+	private boolean state_switch = false; // 無敵モード終了時画像切り替えに使用するboolean(ボタン)
 	private float tickTime = 0;
 
 	Point point = Point.Center;
@@ -69,7 +67,7 @@ public class Animal extends Sprite {
 					tick_w = 0;
 				}
 				state_switch = !state_switch;
-				tick_w+=deltaTime;
+				tick_w += deltaTime;
 			}
 			while (tickTime > tick) { // 無敵状態終了処理
 				tickTime -= tick;
@@ -113,6 +111,8 @@ public class Animal extends Sprite {
 				point = Point.Right;
 			} else
 				accelerateRight();
+			break;
+		case None:
 			break;
 		}
 
@@ -168,8 +168,9 @@ public class Animal extends Sprite {
 	// 無敵状態にする
 	public void setFlag() {
 		flag = true;
+		tickTime = 0;
 		image = Assets.animal_sp; // 無敵状態は画像変えるよ！
-		tick += TICK_INITIAL;
+		tick = TICK_INITIAL;
 	}
 
 	// 無敵状態かどうか返す true = 無敵状態, false = 通常状態

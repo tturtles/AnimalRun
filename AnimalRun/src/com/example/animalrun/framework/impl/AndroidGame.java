@@ -1,6 +1,5 @@
 package com.example.animalrun.framework.impl;
 
-
 import com.example.animalrun.framework.Audio;
 import com.example.animalrun.framework.FileIO;
 import com.example.animalrun.framework.Game;
@@ -10,7 +9,6 @@ import com.example.animalrun.framework.Screen;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -19,9 +17,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -84,9 +82,14 @@ public abstract class AndroidGame extends Activity implements Game {
 		mainLayout = new RelativeLayout(this);
 		mainLayout.addView(renderView);
 		et = new EditText(this);
+		InputFilter[] inputFilter = new InputFilter[1];
+		inputFilter[0] = new InputFilter.LengthFilter(5);	// EditTextの文字数制限
+		et.setFilters(inputFilter);
 		RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(
-				(int)((float)WIDTH*_scaleX), (int)((float)HEIGHT*_scaleY));
-		param.setMargins((int)((float)ET_X*_scaleX+0.5f), (int)((float)ET_Y*_scaleY+0.5f), 0, 0);
+				(int) ((float) WIDTH * _scaleX),
+				(int) ((float) HEIGHT * _scaleY));
+		param.setMargins((int) ((float) ET_X * _scaleX + 0.5f),
+				(int) ((float) ET_Y * _scaleY + 0.5f), 0, 0);
 		mainLayout.addView(et, param);
 		et.setBackgroundColor(ET_BUCKCOLOR);
 		et.setTextColor(ET_TEXTCOLOR);

@@ -1,9 +1,5 @@
 package com.example.animalrun.framework;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import android.content.ContentValues;
 
 public interface FileIO {
