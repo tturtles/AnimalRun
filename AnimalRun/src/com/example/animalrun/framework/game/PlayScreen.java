@@ -4,12 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.R.anim;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
@@ -132,7 +129,6 @@ public class PlayScreen extends Screen {
 		while (iterator.hasNext()) { // iteratorの中で次の要素がある限りtrue
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
-			sprite.draw(g);
 			if (animal.isCollision(sprite)) { // 衝突した場合
 
 				if (sprite instanceof Esa) { // エサの場合
@@ -157,6 +153,13 @@ public class PlayScreen extends Screen {
 				break;
 			}
 		}
+		
+		iterator = sprites.iterator();
+		while (iterator.hasNext()) {
+			Sprite sprite = (Sprite) iterator.next();
+			sprite.draw(g);
+		}
+		
 		Paint paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setTextSize(50);
