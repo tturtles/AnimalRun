@@ -27,13 +27,13 @@ public class PlayScreen extends Screen {
 		super(game);
 		switch (select) {
 		case 1: // タヌキ選択時
-			animal = new Animal(190, 630, Assets.animal);
+			animal = new Animal(190, 630, Assets.tanukinorone,1);
 			break;
 		case 2: // クマ選択時
-			animal = new Animal(190, 630, Assets.animal);
+			animal = new Animal(190, 630, Assets.kumanorone,2);
 			break;
 		case 3: // ライオン選択時
-			animal = new Animal(190, 630, Assets.animal);
+			animal = new Animal(190, 630, Assets.lionnorone,3);
 			break;
 		}
 		world = new World(select);
@@ -47,9 +47,8 @@ public class PlayScreen extends Screen {
 			updateReady(touchEvents, deltaTime);
 		if (state == GameState.Running)
 			updateRunning(touchEvents, deltaTime);
-		if (state == GameState.GameOver) {
+		if (state == GameState.GameOver)
 			updateGameOver(touchEvents);
-		}
 	}
 
 	private void updateReady(List<TouchEvent> touchEvents, float deltaTime) {
@@ -104,7 +103,7 @@ public class PlayScreen extends Screen {
 		if (state == GameState.Ready)
 			drawReadyUI();
 		if (state == GameState.Running)
-			drawRunningUI();
+			drawRunningUI(deltaTime);
 		if (state == GameState.GameOver)
 			drawGameOverUI();
 	}
@@ -119,11 +118,11 @@ public class PlayScreen extends Screen {
 		g.drawTextAlp("Ready?", 70, 300, paint);
 	}
 
-	private void drawRunningUI() {
+	private void drawRunningUI(float deltaTime) {
 		// ゲーム中のUI(描画系)
 		Graphics g = game.getGraphics();
 		world.draw(g);
-		animal.draw(g);
+		animal.draw(g,deltaTime);
 		LinkedList sprites = world.getSprites();
 		Iterator iterator = sprites.iterator(); // Iterator=コレクション内の要素を順番に取り出す方法
 		while (iterator.hasNext()) { // iteratorの中で次の要素がある限りtrue
@@ -153,13 +152,13 @@ public class PlayScreen extends Screen {
 				break;
 			}
 		}
-		
+
 		iterator = sprites.iterator();
 		while (iterator.hasNext()) {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.draw(g);
 		}
-		
+
 		Paint paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setTextSize(50);
@@ -186,8 +185,7 @@ public class PlayScreen extends Screen {
 		else
 			return false;
 	}
-	public boolean isBounds(TouchEvent event, int x, int y, int width,
-			int height) {
+	public boolean isBounds(TouchEvent event, int x, int y, int width, int height) {
 		if (event.x > x && event.x < x + width - 1 && event.y > y
 				&& event.y < y + height - 1)
 			return true;
