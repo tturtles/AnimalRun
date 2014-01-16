@@ -28,14 +28,37 @@ public class Animal extends Sprite {
 	private float tick_w = 0; // 無敵モード終了時画像切り替えでdeltaTimeを溜める変数
 	private boolean state_switch = false; // 無敵モード終了時画像切り替えに使用するboolean(ボタン)
 	private float tickTime = 0;
+	private Pixmap[][] image=new Pixmap[2][2]; // 動物イラストを格納する二次元配列
+    　　private int swy=0; // 動物をノーマルと無敵の間を遷移する変数  0がノーマル状態  1が無敵状態
+    　　private int swx=0; // 動物の状態を遷移する変数  0がone状態  1がtwo状態
 
 	Point point = Point.Center;
 	Point request = Point.None;
 
 	private boolean flag = false; // true = 無敵状態, false = 通常状態
 
-	public Animal(double x, double y, Pixmap pixmap) {
-		super(pixmap);
+	public Animal(double x, double y, Pixmap pixmap,int n) {
+		 super(pixmap);
+		 switch(n){
+	        case 1:
+			image[0][0]= Assets.tanukinorone;
+			image[0][1]= Assets.tanukinortwo;
+			image[1][0]= Assets.tanukiinvone;
+			image[1][1]= Assets.tanukiinvtwo;
+			break;
+	        case 2:
+			image[0][0]= Assets.kumanorone;
+			image[0][1]= Assets.kumanortwo;
+			image[1][0]= Assets.kumainvone;
+			image[1][1]= Assets.kumainvtwo;
+			break;
+	        case 3:
+			image[0][0]= Assets.lionnorone;
+			image[0][1]= Assets.lionnortwo;
+			image[1][0]= Assets.lioninvone;
+			image[1][1]= Assets.lioninvtwo;
+			break;
+	        }
 		this.x = x;
 		this.y = y;
 		width = 100;
@@ -57,13 +80,14 @@ public class Animal extends Sprite {
 		// 無敵状態時の処理
 		if (flag) {
 			tickTime += deltaTime;
-
 			if (tickTime > tick_lasttime) {
 				if (tick_w > image_changeTime) {
-					if (state_switch)
-						image = Assets.animal;
-					else
-						image = Assets.animal_sp;
+					swy=1;
+					if (state_switch){
+					swx=0;
+					}else{
+					swx=0;
+					}
 					tick_w = 0;
 				}
 				state_switch = !state_switch;
@@ -74,7 +98,8 @@ public class Animal extends Sprite {
 				flag = false;
 			}
 		} else {
-			image = Assets.animal;
+			swy=0;
+			swx=0;
 			tick = 0;
 		}
 
@@ -122,7 +147,7 @@ public class Animal extends Sprite {
 	}
 
 	public void draw(Graphics g, float deltaTime) {
-		g.drawPixmap(Assets.animal, (int) x, (int) y);
+			g.drawPixmap(image[swy][swx], (int) x, (int) y);
 	}
 
 	// 左移動
@@ -169,7 +194,7 @@ public class Animal extends Sprite {
 	public void setFlag() {
 		flag = true;
 		tickTime = 0;
-		image = Assets.animal_sp; // 無敵状態は画像変えるよ！
+		swy=1;// 無敵状態は画像変えるよ！
 		tick = TICK_INITIAL;
 	}
 
@@ -177,5 +202,4 @@ public class Animal extends Sprite {
 	public boolean getflag() {
 		return flag;
 	}
-
 }
