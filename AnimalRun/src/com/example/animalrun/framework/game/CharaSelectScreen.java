@@ -50,9 +50,9 @@ public class CharaSelectScreen extends Screen {
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
 		g.drawRect(0, 0, 481, 801, Color.BLACK);
-		g.drawPixmap(Assets.bt_kapipara, 0, 100);
-		g.drawPixmap(Assets.bt_lion, 0, 300);
-		g.drawPixmap(Assets.bt_datyou, 0, 500);
+		g.drawPixmap(Assets.tanuki_bt, 0, 100);
+		g.drawPixmap(Assets.kuma_bt, 0, 300);
+		g.drawPixmap(Assets.lion_bt, 0, 500);
 	}
 
 	@Override
