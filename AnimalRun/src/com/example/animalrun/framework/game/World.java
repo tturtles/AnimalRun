@@ -46,14 +46,17 @@ public class World {
 		// エサ画像イラストと障害物の移動速度の設定
 		image_esa = new Pixmap[2];
 		switch (select) {
-		case 1:
-			this.speed = 3;
+		case 1:// タヌキ
+			image_esa[0] = Assets.tanukiesa_true;
+			image_esa[1] = Assets.tanukiesa_false;
+			speed = 3;
 			PERC_CAR = 60;
 			PERC_WALKER = 10;
 			PERC_ESA = 30;
-		case 3:// ダチョウ
-			image_esa[0] = Assets.esa1_true;
-			image_esa[1] = Assets.esa1_false;
+			break;
+		case 3:// ライオン
+			image_esa[0] = Assets.lionesa_true;
+			image_esa[1] = Assets.lionesa_false;
 			if (select == 3) {
 				this.speed = 11;
 				PERC_CAR = 70;
@@ -61,9 +64,9 @@ public class World {
 				PERC_ESA = 0;
 			}
 			break;
-		case 2:// ライオン
-			image_esa[0] = Assets.esa2_true;
-			image_esa[1] = Assets.esa2_false;
+		case 2:// くま
+			image_esa[0] = Assets.kumaesa_true;
+			image_esa[1] = Assets.kumaesa_false;
 			speed = 7;
 			PERC_CAR = 60;
 			PERC_WALKER = 30;
