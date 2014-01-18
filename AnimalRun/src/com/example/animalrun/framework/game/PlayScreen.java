@@ -22,18 +22,18 @@ public class PlayScreen extends Screen {
 	GameState state = GameState.Ready;
 	private World world;
 	private Animal animal;
-
+	
 	public PlayScreen(Game game, int select) {
 		super(game);
 		switch (select) {
 		case 1: // タヌキ選択時
-			animal = new Animal(190, 630, Assets.tanukinorone,1);
+			animal = new Animal(1);
 			break;
 		case 2: // クマ選択時
-			animal = new Animal(190, 630, Assets.kumanorone,2);
+			animal = new Animal(2);
 			break;
 		case 3: // ライオン選択時
-			animal = new Animal(190, 630, Assets.lionnorone,3);
+			animal = new Animal(3);
 			break;
 		}
 		world = new World(select);
@@ -115,14 +115,14 @@ public class PlayScreen extends Screen {
 		Paint paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setTextSize(100);
-		g.drawTextAlp("Ready?", 70, 300, paint);
+		g.drawPixmap(Assets.logo_ready, 20, 300);
 	}
 
 	private void drawRunningUI(float deltaTime) {
 		// ゲーム中のUI(描画系)
 		Graphics g = game.getGraphics();
 		world.draw(g);
-		animal.draw(g,deltaTime);
+		animal.draw(g, deltaTime);
 		LinkedList sprites = world.getSprites();
 		Iterator iterator = sprites.iterator(); // Iterator=コレクション内の要素を順番に取り出す方法
 		while (iterator.hasNext()) { // iteratorの中で次の要素がある限りtrue
@@ -139,7 +139,7 @@ public class PlayScreen extends Screen {
 				}
 
 				if (!animal.getflag()) // 通常状態で障害物に衝突
-					state = GameState.GameOver;
+					game.setScreen(new GameOverScreen(game, world));
 
 				if (animal.getflag()) // 無敵状態の時
 					sprite.crush(true);
@@ -185,7 +185,9 @@ public class PlayScreen extends Screen {
 		else
 			return false;
 	}
-	public boolean isBounds(TouchEvent event, int x, int y, int width, int height) {
+
+	public boolean isBounds(TouchEvent event, int x, int y, int width,
+			int height) {
 		if (event.x > x && event.x < x + width - 1 && event.y > y
 				&& event.y < y + height - 1)
 			return true;
@@ -200,14 +202,13 @@ public class PlayScreen extends Screen {
 		Paint paint = new Paint();
 		paint.setColor(Color.RED);
 		paint.setTextSize(100);
-		g.drawTextAlp("GameOver", 0, 300, paint);
 	}
 
 	@Override
 	public void pause() {
 		if (state == GameState.GameOver) {
-//			addScore(world.getScore());
-//			save(game.getFileIO());
+			// addScore(world.getScore());
+			// save(game.getFileIO());
 		}
 	}
 

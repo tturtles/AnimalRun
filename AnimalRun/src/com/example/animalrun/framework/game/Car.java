@@ -7,11 +7,11 @@ public class Car extends Sprite {
 	private int vy;
 	private int vx;
 
-	public Car(double _x, int speed, Pixmap pixmap) {
-		super(pixmap);
+	public Car(double _x, int speed) {
 		speedY = speed;
 		width = 100;
 		height = 150;
+		this.image = Assets.car;
 		this.x = _x;
 		this.y = -height;
 	}

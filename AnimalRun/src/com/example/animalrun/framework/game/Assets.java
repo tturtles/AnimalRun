@@ -51,4 +51,8 @@ public class Assets {
 	public static Pixmap car;
 	public static Pixmap truk;
 	public static Pixmap walker;
+	
+	public static Pixmap table;
+	public static Pixmap logo_gameover;
+	public static Pixmap logo_ready;
 }

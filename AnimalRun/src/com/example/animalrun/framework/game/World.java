@@ -17,7 +17,7 @@ public class World {
 	private final int LEFT = 40;
 	private final int CENTER = 195;
 	private final int RIGHT = 345;
-	private int PERC_CAR, PERC_WALKER, PERC_ESA;
+	private int perc_car, perc_walk, perc_esa;
 	private int speed;
 	private int score = 0;
 	private int select = 0;
@@ -50,27 +50,27 @@ public class World {
 			image_esa[0] = Assets.tanukiesa_true;
 			image_esa[1] = Assets.tanukiesa_false;
 			speed = 3;
-			PERC_CAR = 60;
-			PERC_WALKER = 10;
-			PERC_ESA = 30;
+			perc_car = 60;
+			perc_walk = 10;
+			perc_esa = 30;
 			break;
 		case 3:// ライオン
 			image_esa[0] = Assets.lionesa_true;
 			image_esa[1] = Assets.lionesa_false;
 			if (select == 3) {
 				this.speed = 11;
-				PERC_CAR = 70;
-				PERC_WALKER = 30;
-				PERC_ESA = 0;
+				perc_car = 70;
+				perc_walk = 20;
+				perc_esa = 10;
 			}
 			break;
 		case 2:// くま
 			image_esa[0] = Assets.kumaesa_true;
 			image_esa[1] = Assets.kumaesa_false;
 			speed = 7;
-			PERC_CAR = 60;
-			PERC_WALKER = 30;
-			PERC_ESA = 10;
+			perc_car = 60;
+			perc_walk = 20;
+			perc_esa = 20;
 			break;
 		}
 
@@ -136,14 +136,14 @@ public class World {
 		count_list++;
 
 		int ran = rand.nextInt(100);
-		if (ran > 100 - PERC_CAR) {
+		if (ran > 100 - perc_car) {
 			if (ran % 2 == 0)
-				sprites.add(new Car(x, speed, Assets.car));
+				sprites.add(new Car(x, speed));
 			else
-				sprites.add(new Truk(x, speed, Assets.truk));
-		} else if (ran > (100 - PERC_CAR) - PERC_WALKER) {
-			sprites.add(new Walker(speed, Assets.walker));
-		} else if (ran <= PERC_ESA) {
+				sprites.add(new Truk(x, speed));
+		} else if (ran > (100 - perc_car) - perc_walk) {
+			sprites.add(new Walker(speed));
+		} else if (ran <= perc_esa) {
 			if (ran % 2 == 0)
 				sprites.add(new Esa(x, speed, true, image_esa[0]));
 			else

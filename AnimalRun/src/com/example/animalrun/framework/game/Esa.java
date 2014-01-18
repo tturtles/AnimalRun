@@ -9,7 +9,6 @@ public class Esa extends Sprite {
 	private boolean flag;
 
 	public Esa(double x,int speed, boolean flag, Pixmap pixmap) {
-		super(pixmap);
 		speedY = speed;
 		width = 100;
 		height = 100;
@@ -17,6 +16,7 @@ public class Esa extends Sprite {
 		this.y = -height;
 		this.flag = flag;
 		this.speedX = 0;
+		this.image = pixmap;
 	}
 
 	public void Update() {

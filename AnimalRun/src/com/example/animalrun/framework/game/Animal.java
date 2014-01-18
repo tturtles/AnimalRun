@@ -6,6 +6,10 @@ import com.example.animalrun.framework.Pixmap;
 
 public class Animal extends Sprite {
 
+	enum AnimalState {
+		Normal, Unrivaled
+	}
+
 	enum Point {
 		Left, Center, Right, None
 	}
@@ -22,45 +26,52 @@ public class Animal extends Sprite {
 	private static final float TICK_INITIAL3 = 0.1f;
 	private static float image_changeTime = TICK_INITIAL3;
 
+	// 画像の切り替え
+	private static final float TICK_INITIAL4 = 0.3f;
+	private static float tick_changeSwx = TICK_INITIAL4;
+
 	private double vx;
 	private double speed; // 移動速度
 
 	private float tick_w = 0; // 無敵モード終了時画像切り替えでdeltaTimeを溜める変数
+	private float tick_swxChange = 0; //
+
 	private boolean state_switch = false; // 無敵モード終了時画像切り替えに使用するboolean(ボタン)
 	private float tickTime = 0;
-	private Pixmap[][] image=new Pixmap[2][2]; // 動物イラストを格納する二次元配列
-    　　private int swy=0; // 動物をノーマルと無敵の間を遷移する変数  0がノーマル状態  1が無敵状態
-    　　private int swx=0; // 動物の状態を遷移する変数  0がone状態  1がtwo状態
+	private Pixmap[][] image = new Pixmap[2][2]; // 動物イラストを格納する二次元配列
+	private int swy = 0; // 動物をノーマルと無敵の間を遷移する変数 0がノーマル状態 1が無敵状態
+	private int swx = 0; // 動物の状態を遷移する変数 0がone状態 1がtwo状態
+	private int select = 0;
+
+	private AnimalState state = AnimalState.Normal;
 
 	Point point = Point.Center;
 	Point request = Point.None;
 
-	private boolean flag = false; // true = 無敵状態, false = 通常状態
-
-	public Animal(double x, double y, Pixmap pixmap,int n) {
-		 super(pixmap);
-		 switch(n){
-	        case 1:
-			image[0][0]= Assets.tanukinorone;
-			image[0][1]= Assets.tanukinortwo;
-			image[1][0]= Assets.tanukiinvone;
-			image[1][1]= Assets.tanukiinvtwo;
+	public Animal(int select) {
+		switch (select) {
+		case 1:
+			image[0][0] = Assets.tanukinorone;
+			image[0][1] = Assets.tanukinortwo;
+			image[1][0] = Assets.tanukiinvone;
+			image[1][1] = Assets.tanukiinvtwo;
 			break;
-	        case 2:
-			image[0][0]= Assets.kumanorone;
-			image[0][1]= Assets.kumanortwo;
-			image[1][0]= Assets.kumainvone;
-			image[1][1]= Assets.kumainvtwo;
+		case 2:
+			image[0][0] = Assets.kumanorone;
+			image[0][1] = Assets.kumanortwo;
+			image[1][0] = Assets.kumainvone;
+			image[1][1] = Assets.kumainvtwo;
 			break;
-	        case 3:
-			image[0][0]= Assets.lionnorone;
-			image[0][1]= Assets.lionnortwo;
-			image[1][0]= Assets.lioninvone;
-			image[1][1]= Assets.lioninvtwo;
+		case 3:
+			image[0][0] = Assets.lionnorone;
+			image[0][1] = Assets.lionnortwo;
+			image[1][0] = Assets.lioninvone;
+			image[1][1] = Assets.lioninvtwo;
 			break;
-	        }
-		this.x = x;
-		this.y = y;
+		}
+		this.select = select;
+		this.x = 190;
+		this.y = 630;
 		width = 100;
 		height = 150;
 		speed = 10;
@@ -76,31 +87,26 @@ public class Animal extends Sprite {
 	}
 
 	public void Update(float deltaTime) {
-
-		// 無敵状態時の処理
-		if (flag) {
-			tickTime += deltaTime;
+		tickTime += deltaTime;
+		tick_swxChange += deltaTime;
+		if (state == AnimalState.Unrivaled) {
 			if (tickTime > tick_lasttime) {
 				if (tick_w > image_changeTime) {
-					swy=1;
-					if (state_switch){
-					swx=0;
-					}else{
-					swx=0;
-					}
+					swy = swy == 0 ? 1 : 0;
 					tick_w = 0;
 				}
 				state_switch = !state_switch;
 				tick_w += deltaTime;
 			}
-			while (tickTime > tick) { // 無敵状態終了処理
+			if (tickTime > tick) { // 無敵状態終了処理
 				tickTime -= tick;
-				flag = false;
+				state = AnimalState.Normal;
 			}
-		} else {
-			swy=0;
-			swx=0;
-			tick = 0;
+		}
+
+		if (tick_swxChange > tick_changeSwx) {
+			tick_swxChange -= tick_changeSwx;
+			swx = swx == 0 ? 1 : 0;
 		}
 
 		switch (request) {
@@ -140,14 +146,12 @@ public class Animal extends Sprite {
 		case None:
 			break;
 		}
-
 		x += vx;
-
 		vx = 0;
 	}
 
 	public void draw(Graphics g, float deltaTime) {
-			g.drawPixmap(image[swy][swx], (int) x, (int) y);
+		g.drawPixmap(image[swy][swx], (int) x, (int) y);
 	}
 
 	// 左移動
@@ -190,16 +194,20 @@ public class Animal extends Sprite {
 		return false;
 	}
 
-	// 無敵状態にする
+	// 無敵状態にする7
 	public void setFlag() {
-		flag = true;
+		state = AnimalState.Unrivaled;
 		tickTime = 0;
-		swy=1;// 無敵状態は画像変えるよ！
+		swy = 1;// 無敵状態は画像変えるよ！
 		tick = TICK_INITIAL;
 	}
 
 	// 無敵状態かどうか返す true = 無敵状態, false = 通常状態
 	public boolean getflag() {
-		return flag;
+		return state == AnimalState.Unrivaled ? true : false;
+	}
+
+	public int getSelect() {
+		return select;
 	}
 }

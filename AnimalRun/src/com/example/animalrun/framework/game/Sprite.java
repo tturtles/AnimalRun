@@ -17,8 +17,7 @@ public abstract class Sprite {
 	protected boolean flag_crush = false;
 	protected int angle = 0;
 
-	public Sprite(Pixmap pixmap) {
-		this.image = pixmap;
+	public Sprite() {
 	}
 
 	public abstract void Update();

@@ -9,8 +9,7 @@ public class Walker extends Sprite {
 	private final int RIGHT = 400;
 	private int vy;
 
-	public Walker(int speed, Pixmap pixmap) {
-		super(pixmap);
+	public Walker(int speed) {
 		width = 50;
 		height = 50;
 		Random rand = new Random();
@@ -25,6 +24,7 @@ public class Walker extends Sprite {
 			y = -height;
 			break;
 		}
+		this.image = Assets.walker;
 		speedY = speed;
 	}
 
