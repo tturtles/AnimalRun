@@ -54,5 +54,8 @@ public class Assets {
 	
 	public static Pixmap table;
 	public static Pixmap logo_gameover;
-	public static Pixmap logo_ready;
+	public static Pixmap logo_ready;	
+	
+	public static Pixmap image_ScoreScreen;
+	public static Pixmap image_RunkingScreen;
 }

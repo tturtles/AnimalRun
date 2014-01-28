@@ -62,13 +62,15 @@ public class ScoreScreen extends Screen {
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawRect(0, 0, 481, 801, Color.WHITE);
-		g.drawTextAlp("スコア", 30, 100, Color.RED, 50);
-		g.drawTextAlp("" + world.getScore(), 200, 200, Color.BLACK, 100);
-		g.drawPixmap(Assets.bt_retry, 20, 650);
-		g.drawPixmap(Assets.bt_title, 200, 650);
-		g.drawTextAlp("name", 30, 250, Color.RED, 50);
-		g.drawPixmap(Assets.bt_touroku, 140, 400);
+		g.drawPixmap(Assets.image_ScoreScreen, 0, 0);
+		int count = 0;
+		for (int _score = world.getScore(); _score > 10; count++) {
+			_score = _score / 10;
+		}
+		int score_x = 90 - 40 * count;
+		g.drawTextAlp("" + this.world.getScore(), score_x, 370, Color.BLACK, 150);
+		g.drawPixmap(Assets.bt_retry, 0, 700);
+		g.drawPixmap(Assets.bt_title, 280, 700);
 		if (flag)
 			g.drawTextAlp("登録完了", 110, 470, Color.RED, 70);
 		game.chengeEditText(true);

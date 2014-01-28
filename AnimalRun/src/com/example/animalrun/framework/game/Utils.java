@@ -35,7 +35,7 @@ public class Utils {
 		String where = "mode like ?";
 		String value[] = new String[1];
 		value[0] = mode;
-		return files.readFile(columns, where, value, order, 5);
+		return files.readFile(columns, where, value, order, 3);
 	}
 
 }

@@ -40,7 +40,7 @@ public abstract class AndroidGame extends Activity implements Game {
 	final int WIDTH = 300;
 	final int HEIGHT = 100;
 	final int ET_X = 90;
-	final int ET_Y = 270;
+	final int ET_Y = 460;
 	final int ET_BUCKCOLOR = Color.GRAY;
 	final int ET_TEXTCOLOR = Color.WHITE;
 	final int ET_TEXTSIZE = 30;

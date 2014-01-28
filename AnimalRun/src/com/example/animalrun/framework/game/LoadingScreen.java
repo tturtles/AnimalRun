@@ -94,6 +94,9 @@ public class LoadingScreen extends Screen {
 		Assets.table = g.newPixmap("table.png", PixmapFormat.ARGB4444);
 		Assets.logo_gameover = g.newPixmap("Logo_GameOver.png", PixmapFormat.ARGB4444);
 		Assets.logo_ready = g.newPixmap("Logo_Ready.png", PixmapFormat.ARGB4444);
+		
+		Assets.image_ScoreScreen = g.newPixmap("ScoreScreen.png", PixmapFormat.ARGB4444);
+		Assets.image_RunkingScreen = g.newPixmap("RunkingScreen.png", PixmapFormat.ARGB4444);
 		Utils.load(game.getFileIO());
 		game.setScreen(new StartScreen(game));
 	}

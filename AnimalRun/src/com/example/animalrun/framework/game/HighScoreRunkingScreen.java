@@ -40,23 +40,23 @@ public class HighScoreRunkingScreen extends Screen {
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawRect(0, 0, 481, 801, Color.WHITE);
+		g.drawPixmap(Assets.image_RunkingScreen, 0, 0);
 		g.drawPixmap(Assets.bt_title, 270, 680);
 		String[] mode_list = { "easy", "normal", "hard" };
 		for (int i = 0; i < list.length; i++)
 			if (list[i] == null) {
-				g.drawTextAlp(mode_list[i] + "の登録スコアがありません", 10,
-						(100 + i * 200), Color.RED, 25);
+//				g.drawTextAlp(mode_list[i] + "の登録スコアがありません", 10,
+//						(100 + i * 200), Color.RED, 25);
 			} else {
-				g.drawTextAlp(mode_list[i] + "モードランキング", 10, (80 + i * 220),
-						Color.RED, 25);
+//				g.drawTextAlp(mode_list[i] + "モードランキング", 10, (80 + i * 220),
+//						Color.RED, 25);
 				for (int j = 0; j < list[i].length; j++) {
-					g.drawTextAlp((j + 1) + "位", 10, (80 + i * 220) + (j + 1)
+					g.drawTextAlp((j + 1) + "位", 10, (190 + i * 220) + (j + 1)
 							* 30, Color.RED, 25);
 					for (int k = 0; k < list[i][j].length
 							&& list[i][j][k] != null; k++) {
 						g.drawTextAlp(list[i][j][k], 60 + k * 150,
-								(80 + i * 220) + (j + 1) * 30, Color.RED, 25);
+								(190 + i * 220) + (j + 1) * 30, Color.RED, 25);
 					}
 				}
 			}
