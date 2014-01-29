@@ -26,11 +26,13 @@ public class StartScreen extends Screen {
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (isBounds(event, 80, 400, 250, 100)) {
 					game.setScreen(new CharaSelectScreen(game));
+					Assets.bgm_select.play(1);
 				} else if(isBounds(event, 80, 500, 320, 100)) {
 					game.setScreen(new HighScoreRunkingScreen(game));
-					
+					Assets.bgm_select.play(1);
 				} else if(isBounds(event, 80, 600, 260, 100)) {
 					System.exit(0);
+					Assets.bgm_select.play(1);
 				}
 			}
 		}

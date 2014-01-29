@@ -25,6 +25,7 @@ public class PlayScreen extends Screen {
 	
 	public PlayScreen(Game game, int select) {
 		super(game);
+		Assets.bgm_playscreen.play();
 		switch (select) {
 		case 1: // タヌキ選択時
 			animal = new Animal(1);
@@ -59,6 +60,7 @@ public class PlayScreen extends Screen {
 			switch (event.type) {
 			case MotionEvent.ACTION_UP:
 				state = GameState.Running;
+				Assets.bgm_select.play(1);
 			}
 		}
 	}
@@ -129,6 +131,11 @@ public class PlayScreen extends Screen {
 			Sprite sprite = (Sprite) iterator.next();
 			sprite.Update();
 			if (animal.isCollision(sprite)) { // 衝突した場合
+				if (animal.getflag()) {
+					// 無敵状態の時
+					sprite.crush(true);
+					Assets.bgm_syoutotu.play(1);
+				}
 
 				if (sprite instanceof Esa) { // エサの場合
 					Esa esa = (Esa) sprite;
@@ -141,8 +148,6 @@ public class PlayScreen extends Screen {
 				if (!animal.getflag()) // 通常状態で障害物に衝突
 					game.setScreen(new GameOverScreen(game, world));
 
-				if (animal.getflag()) // 無敵状態の時
-					sprite.crush(true);
 
 				break;
 			}
@@ -218,6 +223,9 @@ public class PlayScreen extends Screen {
 
 	@Override
 	public void dispose() {
+		Assets.bgm_muteki.stop();
+		Assets.bgm_playscreen.stop();
+		Assets.bgm_syoutotu.dispose();
 	}
 
 }

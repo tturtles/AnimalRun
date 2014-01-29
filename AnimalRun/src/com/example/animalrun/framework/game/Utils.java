@@ -1,12 +1,19 @@
 package com.example.animalrun.framework.game;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import android.content.ContentValues;
+import android.content.SharedPreferences;
+
 import com.example.animalrun.framework.FileIO;
 
 public class Utils {
-	public static boolean soundEnabled = true;
+	public SharedPreferences sharedPref;
 
 	public static void load(FileIO files) {
+		BufferedReader in = null;
+		try {
 		String[] mode = { "easy", "normal", "hard" };
 		String sql = "create table score_data("
 				+ "_id integer primary key autoincrement,"
@@ -16,6 +23,15 @@ public class Utils {
 			for (int i = 0; i < mode.length; i++)
 				for (int j = 0; j < 5; j++)
 					addScore(files, "Noname", 0, mode[i]);
+		} catch (Exception e) {
+			// デフォルト設定があるのでエラーは無視
+		} finally {
+			try {
+				if (in != null)
+					in.close();
+			} catch (IOException e) {
+			}
+		}
 	}
 
 	public static boolean addScore(FileIO files, String name, int score,

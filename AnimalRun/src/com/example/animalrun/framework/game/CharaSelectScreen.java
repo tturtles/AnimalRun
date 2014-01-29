@@ -1,7 +1,9 @@
 package com.example.animalrun.framework.game;
 
 import java.util.List;
+
 import android.graphics.Color;
+
 import com.example.animalrun.framework.Game;
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Screen;
@@ -31,6 +33,7 @@ public class CharaSelectScreen extends Screen {
 					select = 3;
 				}
 				if (select > 0) {
+					Assets.bgm_select.play(1);
 					game.setScreen(new PlayScreen(game, select));
 				}
 			}

@@ -64,6 +64,10 @@ public class GameOverScreen extends Screen {
 				image = Assets.liongameovertwo;
 			break;
 		}
+		if(flag)
+			Assets.bgm_newrecode.play(1);
+		else 
+			Assets.bgm_norecode.play(1);
 	}
 
 	@Override

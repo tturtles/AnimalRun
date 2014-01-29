@@ -18,7 +18,7 @@ public class AndroidMusic implements Music, OnCompletionListener{
 			mediaPlayer.setDataSource(assetDescriptor.getFileDescriptor(),
 									  assetDescriptor.getStartOffset(),
 									  assetDescriptor.getLength());
-			mediaPlayer.prepare();	//・ｽ・ｽ・ｽ・ｽ
+			mediaPlayer.prepare();	
 			isPrepared = true;
 			mediaPlayer.setOnCompletionListener(this);
 		}catch (Exception e) {
@@ -26,7 +26,7 @@ public class AndroidMusic implements Music, OnCompletionListener{
 		}
 	}
 	
-	public void onCompletion(MediaPlayer mp) {	//・ｽﾄ撰ｿｽ・ｽ・ｽ・ｽI・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ・ｽﾌイ・ｽx・ｽ・ｽ・ｽg
+	public void onCompletion(MediaPlayer mp) {	
 		synchronized (this) {
 			isPrepared = false;
 		}
@@ -37,7 +37,7 @@ public class AndroidMusic implements Music, OnCompletionListener{
 			return ;
 		
 		try {
-			synchronized (this) {			//・ｽX・ｽ・ｽ・ｽb・ｽh・ｽﾌ排・ｽ・ｽ・ｽ・ｽ・ｽ・ｽ
+			synchronized (this) {			
 				if(!isPrepared)
 					mediaPlayer.prepare();
 				mediaPlayer.start();
@@ -56,7 +56,7 @@ public class AndroidMusic implements Music, OnCompletionListener{
 		}
 	}
 
-	public void pause() {					//・ｽﾄ撰ｿｽ・ｽ・ｽ・ｽ・ｽ・ｽﾇゑｿｽ・ｽ・ｽ・ｽ`・ｽF・ｽb・ｽN・ｽ・ｽ・ｽA・ｽﾄ撰ｿｽ・ｽ・ｽ・ｽﾈゑｿｽ齊橸ｿｽ・ｽ~
+	public void pause() {					
 		if(mediaPlayer.isPlaying())
 			mediaPlayer.pause();
 	}
@@ -69,22 +69,22 @@ public class AndroidMusic implements Music, OnCompletionListener{
 		mediaPlayer.setVolume(volume, volume);
 	}
 
-	public boolean isPlaying() {			//・ｽﾄ撰ｿｽ
+	public boolean isPlaying() {		
 		return mediaPlayer.isPlaying();
 	}
 
-	public boolean isStopped() {			//・ｽ・ｽ~・ｽ・ｽ・ｽﾄゑｿｽ・ｽ驍ｩ・ｽﾔゑｿｽ
+	public boolean isStopped() {			
 		return !isPrepared;
 	}
 
-	public boolean isLooping() {			//・ｽ・ｽ・ｽ[・ｽv
+	public boolean isLooping() {		
 		return mediaPlayer.isLooping();
 	}
 
-	public void dispose() {					//・ｽp・ｽ・ｽ
+	public void dispose() {					
 		if(mediaPlayer.isPlaying())
 			mediaPlayer.stop();
-		mediaPlayer.release();		//・ｽJ・ｽ・ｽ
+		mediaPlayer.release();	
 	}
 
 }

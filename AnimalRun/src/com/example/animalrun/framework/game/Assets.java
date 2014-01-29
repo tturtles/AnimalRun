@@ -1,6 +1,8 @@
 package com.example.animalrun.framework.game;
 
+import com.example.animalrun.framework.Music;
 import com.example.animalrun.framework.Pixmap;
+import com.example.animalrun.framework.Sound;
 
 public class Assets {
 	//背景
@@ -60,4 +62,11 @@ public class Assets {
 	
 	public static Pixmap image_ScoreScreen;
 	public static Pixmap image_RunkingScreen;
+	
+	public static Music bgm_playscreen;
+	public static Music bgm_muteki;
+	public static Sound bgm_syoutotu;
+	public static Sound bgm_newrecode;
+	public static Sound bgm_norecode;
+	public static Sound bgm_select;
 }

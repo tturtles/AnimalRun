@@ -1,20 +1,18 @@
 package com.example.animalrun.framework.impl;
 
-
 import com.example.animalrun.framework.Sound;
 
 import android.media.SoundPool;
 
-
 public class AndroidSound implements Sound {
 	int soundId;
 	SoundPool soundPool;
-	
+
 	public AndroidSound(SoundPool soundPool, int soundId) {
 		this.soundId = soundId;
 		this.soundPool = soundPool;
 	}
-	
+
 	public void play(float volume) {
 		soundPool.play(soundId, volume, volume, 0, 0, 1);
 	}

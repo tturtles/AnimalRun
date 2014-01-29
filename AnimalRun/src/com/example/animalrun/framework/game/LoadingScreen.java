@@ -100,6 +100,12 @@ public class LoadingScreen extends Screen {
 		
 		Assets.image_ScoreScreen = g.newPixmap("ScoreScreen.png", PixmapFormat.ARGB4444);
 		Assets.image_RunkingScreen = g.newPixmap("RunkingScreen.png", PixmapFormat.ARGB4444);
+		Assets.bgm_playscreen = game.getAudio().newMusic("bgm_playscreen.ogg");
+		Assets.bgm_muteki = game.getAudio().newMusic("bgm_muteki.ogg");
+		Assets.bgm_syoutotu = game.getAudio().newSound("bgm_syoutotu.ogg");
+		Assets.bgm_newrecode = game.getAudio().newSound("bgm_newrecode.ogg");
+		Assets.bgm_norecode = game.getAudio().newSound("bgm_norecode.ogg");
+		Assets.bgm_select = game.getAudio().newSound("bgm_select.ogg");
 		Utils.load(game.getFileIO());
 		game.setScreen(new StartScreen(game));
 	}

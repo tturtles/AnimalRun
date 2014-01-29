@@ -1,6 +1,7 @@
 package com.example.animalrun.framework.game;
 
 import android.graphics.Rect;
+
 import com.example.animalrun.framework.Graphics;
 import com.example.animalrun.framework.Pixmap;
 
@@ -101,6 +102,8 @@ public class Animal extends Sprite {
 			if (tickTime > tick) { // 無敵状態終了処理
 				tickTime -= tick;
 				state = AnimalState.Normal;
+				Assets.bgm_muteki.stop();
+				Assets.bgm_playscreen.play();
 			}
 		}
 
@@ -200,6 +203,8 @@ public class Animal extends Sprite {
 		tickTime = 0;
 		swy = 1;// 無敵状態は画像変えるよ！
 		tick = TICK_INITIAL;
+		Assets.bgm_playscreen.stop();
+		Assets.bgm_muteki.play();
 	}
 
 	// 無敵状態かどうか返す true = 無敵状態, false = 通常状態

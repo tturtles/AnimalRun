@@ -43,16 +43,19 @@ public class ScoreScreen extends Screen {
 			if (event.type == TouchEvent.TOUCH_UP) {
 				if (isBounds(event, 0, 700, 200, 100)) {
 					game.setScreen(new PlayScreen(game, world.getSelect()));
+					Assets.bgm_select.play(1);
 					game.chengeEditText(false);
 					return;
 				}
 				if (isBounds(event, 90, 580, 300, 80)) {
 					flag = Utils.addScore(game.getFileIO(), game.getEText(),
 							world.getScore(), mode);
+					Assets.bgm_select.play(1);
 					return;
 				}
 				if (isBounds(event, 280, 700, 200, 100)) {
 					game.setScreen(new StartScreen(game));
+					Assets.bgm_select.play(1);
 					return;
 				}
 			}
