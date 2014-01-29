@@ -102,6 +102,7 @@ public class Animal extends Sprite {
 			if (tickTime > tick) { // 無敵状態終了処理
 				tickTime -= tick;
 				state = AnimalState.Normal;
+				swy = 0;
 				Assets.bgm_muteki.stop();
 				Assets.bgm_playscreen.play();
 			}

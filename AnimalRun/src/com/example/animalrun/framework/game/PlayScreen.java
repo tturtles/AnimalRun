@@ -148,7 +148,6 @@ public class PlayScreen extends Screen {
 				if (!animal.getflag()) // 通常状態で障害物に衝突
 					game.setScreen(new GameOverScreen(game, world));
 
-
 				break;
 			}
 

@@ -105,7 +105,11 @@ public class ScoreScreen extends Screen {
 
 	@Override
 	public void dispose() {
-
+		Assets.bgm_muteki.stop();
+		Assets.bgm_playscreen.stop();
+		Assets.bgm_syoutotu.dispose();
+		Assets.bgm_newrecode.dispose();
+		Assets.bgm_norecode.dispose();
 	}
 
 }
