@@ -54,16 +54,6 @@ public class World {
 			perc_walk = 10;
 			perc_esa = 30;
 			break;
-		case 3:// ライオン
-			image_esa[0] = Assets.lionesa_true;
-			image_esa[1] = Assets.lionesa_false;
-			if (select == 3) {
-				this.speed = 11;
-				perc_car = 70;
-				perc_walk = 20;
-				perc_esa = 10;
-			}
-			break;
 		case 2:// くま
 			image_esa[0] = Assets.kumaesa_true;
 			image_esa[1] = Assets.kumaesa_false;
@@ -71,6 +61,14 @@ public class World {
 			perc_car = 60;
 			perc_walk = 20;
 			perc_esa = 20;
+			break;
+		case 3:// ライオン
+			image_esa[0] = Assets.lionesa_true;
+			image_esa[1] = Assets.lionesa_false;
+			this.speed = 11;
+			perc_car = 70;
+			perc_walk = 20;
+			perc_esa = 10;
 			break;
 		}
 

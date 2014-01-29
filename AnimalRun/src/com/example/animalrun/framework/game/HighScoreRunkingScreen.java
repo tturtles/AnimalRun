@@ -29,7 +29,7 @@ public class HighScoreRunkingScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (isBounds(event, 270, 680, 200, 100)) {
+				if (isBounds(event, 280, 700, 200, 100)) {
 					game.setScreen(new StartScreen(game));
 					return;
 				}
@@ -41,15 +41,12 @@ public class HighScoreRunkingScreen extends Screen {
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
 		g.drawPixmap(Assets.image_RunkingScreen, 0, 0);
-		g.drawPixmap(Assets.bt_title, 270, 680);
-		String[] mode_list = { "easy", "normal", "hard" };
+		g.drawPixmap(Assets.bt_title, 280, 700);
 		for (int i = 0; i < list.length; i++)
 			if (list[i] == null) {
-//				g.drawTextAlp(mode_list[i] + "の登録スコアがありません", 10,
-//						(100 + i * 200), Color.RED, 25);
+				// g.drawTextAlp(mode_list[i] + "の登録スコアがありません", 10,
+				// (100 + i * 200), Color.RED, 25);
 			} else {
-//				g.drawTextAlp(mode_list[i] + "モードランキング", 10, (80 + i * 220),
-//						Color.RED, 25);
 				for (int j = 0; j < list[i].length; j++) {
 					g.drawTextAlp((j + 1) + "位", 10, (190 + i * 220) + (j + 1)
 							* 30, Color.RED, 25);

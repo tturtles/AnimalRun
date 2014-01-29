@@ -41,17 +41,17 @@ public class ScoreScreen extends Screen {
 		for (int i = 0; i < len; i++) {
 			TouchEvent event = touchEvents.get(i);
 			if (event.type == TouchEvent.TOUCH_UP) {
-				if (isBounds(event, 20, 650, 140, 100)) {
+				if (isBounds(event, 0, 700, 200, 100)) {
 					game.setScreen(new PlayScreen(game, world.getSelect()));
 					game.chengeEditText(false);
 					return;
 				}
-				if (isBounds(event, 140, 400, 200, 100)) {
+				if (isBounds(event, 90, 580, 300, 80)) {
 					flag = Utils.addScore(game.getFileIO(), game.getEText(),
 							world.getScore(), mode);
 					return;
 				}
-				if (isBounds(event, 200, 650, 200, 100)) {
+				if (isBounds(event, 280, 700, 200, 100)) {
 					game.setScreen(new StartScreen(game));
 					return;
 				}
@@ -62,17 +62,22 @@ public class ScoreScreen extends Screen {
 	@Override
 	public void present(float deltaTime) {
 		Graphics g = game.getGraphics();
-		g.drawPixmap(Assets.image_ScoreScreen, 0, 0);
+		g.drawRect(0, 0, 481, 801, Color.WHITE);
+		g.drawPixmap(Assets.logo_score, 20, 40);
 		int count = 0;
 		for (int _score = world.getScore(); _score > 10; count++) {
 			_score = _score / 10;
 		}
 		int score_x = 90 - 40 * count;
-		g.drawTextAlp("" + this.world.getScore(), score_x, 370, Color.BLACK, 150);
+		g.drawTextAlp("" + this.world.getScore(), score_x, 370, Color.BLACK,
+				150);
 		g.drawPixmap(Assets.bt_retry, 0, 700);
 		g.drawPixmap(Assets.bt_title, 280, 700);
+		g.drawTextAlp("Name", 20, 440, Color.BLACK, 50);
 		if (flag)
-			g.drawTextAlp("登録完了", 110, 470, Color.RED, 70);
+			g.drawPixmap(Assets.bt_kanryou, 90, 580);
+		else
+			g.drawPixmap(Assets.bt_touroku, 90, 580);
 		game.chengeEditText(true);
 	}
 

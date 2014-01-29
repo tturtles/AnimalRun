@@ -46,6 +46,7 @@ public class Assets {
 	public static Pixmap bt_title;
 	public static Pixmap bt_retry;
 	public static Pixmap bt_touroku;
+	public static Pixmap bt_kanryou;
 	public static Pixmap bt_back;
 	//障害物
 	public static Pixmap car;
@@ -55,6 +56,7 @@ public class Assets {
 	public static Pixmap table;
 	public static Pixmap logo_gameover;
 	public static Pixmap logo_ready;	
+	public static Pixmap logo_score;	
 	
 	public static Pixmap image_ScoreScreen;
 	public static Pixmap image_RunkingScreen;

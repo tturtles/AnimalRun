@@ -48,6 +48,8 @@ public class LoadingScreen extends Screen {
 		Assets.bt_title = g.newPixmap("bt_title.png", PixmapFormat.ARGB4444);
 		Assets.bt_touroku = g
 				.newPixmap("bt_touroku.png", PixmapFormat.ARGB4444);
+		Assets.bt_kanryou = g
+				.newPixmap("bt_kanryou.png", PixmapFormat.ARGB4444);
 		Assets.bt_start = g.newPixmap("bt_start.png", PixmapFormat.ARGB4444);
 		Assets.bt_score = g.newPixmap("bt_score.png", PixmapFormat.ARGB4444);
 		Assets.bt_close = g.newPixmap("bt_close.png", PixmapFormat.ARGB4444);
@@ -94,6 +96,7 @@ public class LoadingScreen extends Screen {
 		Assets.table = g.newPixmap("table.png", PixmapFormat.ARGB4444);
 		Assets.logo_gameover = g.newPixmap("Logo_GameOver.png", PixmapFormat.ARGB4444);
 		Assets.logo_ready = g.newPixmap("Logo_Ready.png", PixmapFormat.ARGB4444);
+		Assets.logo_score = g.newPixmap("logo_score.png", PixmapFormat.ARGB4444);
 		
 		Assets.image_ScoreScreen = g.newPixmap("ScoreScreen.png", PixmapFormat.ARGB4444);
 		Assets.image_RunkingScreen = g.newPixmap("RunkingScreen.png", PixmapFormat.ARGB4444);
