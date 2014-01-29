@@ -14,6 +14,7 @@ public class AndroidMusic implements Music, OnCompletionListener{
 	
 	public AndroidMusic(AssetFileDescriptor assetDescriptor) {
 		mediaPlayer = new MediaPlayer();
+		mediaPlayer.setLooping(true);
 		try {
 			mediaPlayer.setDataSource(assetDescriptor.getFileDescriptor(),
 									  assetDescriptor.getStartOffset(),
